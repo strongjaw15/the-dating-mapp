@@ -36,7 +36,7 @@ const Header = ({user}) => {
                     <a className="nav-link" href="/profile">Profile</a>
                   </li>
                   <li className="nav-item">
-                    <a className="nav-link" href="##" onCLick={logout}>Logout</a>
+                    <a className="nav-link" href="##" onClick={logout}>Logout</a>
                   </li>
                 </>
               )}
