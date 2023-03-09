@@ -1,46 +1,105 @@
 import { useState } from "react"
+import {Modal} from '../components'
 
 const SignupPage = (props) => {
 
-  const defForm = { email: "", password: "" }
+  const defForm = { email: '', fname: '', username: '', zipcode: '', password: '', confirmPassword: '' }
   const [ formData, setFormData ] = useState(defForm)
   const [ signupResult, setSignupResult ] = useState("")
+  const [showModal, setShowModal] = useState(false)
+  const [message, setMessage] = useState('')
 
   const handleInputChange = (e) => {
     setFormData({...formData, [e.target.name]: e.target.value})
   }
 
+  const openModal = () => {
+    setShowModal(true);
+  }
+
+  const closeModal = () => {
+    setShowModal(false);
+  }
+
   const handleFormSubmit = async(e) => {
     e.preventDefault()
-    const query = await fetch("/api/user", {
-      method: "post",
-      body: JSON.stringify(formData),
-      headers: {
-        "Content-Type": "application/json"
-      }
-    })
-
-    if( !query.ok ) {
-      setSignupResult("fail")
+    if (formData.password !== formData.confirmPassword) {
+      setMessage(`passwords don't match`)
+      openModal()
+    } else if (formData.email === '' || formData.fname === '' || formData.username === '' || formData.zipcode === '' || formData.password === '' || formData.confirmPassword === '') {
+      setMessage(`please fill out all forms`)
+      openModal()
     } else {
-      const result = await query.json()
-      setSignupResult("success")
+
+      const query = await fetch("/api/user", {
+        method: "post",
+        body: JSON.stringify(formData),
+        headers: {
+          "Content-Type": "application/json"
+        }
+      })
+      
+      if( !query.ok ) {
+        setSignupResult("fail")
+      } else {
+        const result = await query.json()
+        setSignupResult("success")
+        console.log(result)
+      }
     }
   }
 
   return (
     <>
-      <h1>Signup Page</h1>
+      <h1>give us the deets</h1>
+
+      {showModal ? (<Modal message={message} closeModal={closeModal}/>) : null}
 
       <form className="form mb-3">
         <div className="form-group">
           <label>Email Address</label>
           <input   
-            type="text"
+            type="email"
             name="email"
-            placeholder="john@gmail.com"
+            placeholder="user@email.com"
             className="form-control"
             value={formData.email}
+            onChange={handleInputChange}
+          />
+        </div>
+
+        <div className="form-group">
+          <label>First Name</label>
+          <input   
+            type="text"
+            name="fname"
+            placeholder="Robin"
+            className="form-control"
+            value={formData.username}
+            onChange={handleInputChange}
+          />
+        </div>
+
+        <div className="form-group">
+          <label>Username</label>
+          <input   
+            type="text"
+            name="username"
+            placeholder="username"
+            className="form-control"
+            value={formData.username}
+            onChange={handleInputChange}
+          />
+        </div>
+
+        <div className="form-group">
+          <label>Zipcode</label>
+          <input   
+            type="number"
+            name="zipcode"
+            placeholder="12345"
+            className="form-control"
+            value={formData.username}
             onChange={handleInputChange}
           />
         </div>
@@ -52,6 +111,17 @@ const SignupPage = (props) => {
             name="password"
             className="form-control"
             value={formData.password}
+            onChange={handleInputChange}
+          />
+        </div>
+
+        <div className="form-group">
+          <label>Confirm Password</label>
+          <input   
+            type="password"
+            name="confirmPassword"
+            className="form-control"
+            value={formData.confirmPassword}
             onChange={handleInputChange}
           />
         </div>
