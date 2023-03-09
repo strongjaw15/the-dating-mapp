@@ -1,36 +1,38 @@
 import { useEffect, useState } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+
 import cookie from "js-cookie"
-import { Header, Wrapper } from "./components"
+import { Header, Wrapper, Footer, Maps, Questionaire } from "./components";
+
 import { HomePage, LoginPage, ProfilePage, SignupPage } from "./pages";
 
-import 'bootstrap/dist/css/bootstrap.min.css';
-import './styles/global.css'
+import "bootstrap/dist/css/bootstrap.min.css";
+import "./styles/global.css";
 
 function App() {
-  const [ user, setUser ] = useState(null)
+  const [user, setUser] = useState(null);
 
   const verifyUser = async () => {
-    const authCookie = cookie.get("auth-token")
-    if( authCookie ){
+    const authCookie = cookie.get("auth-token");
+    if (authCookie) {
       const query = await fetch("/api/user/verify", {
         method: "post",
         body: JSON.stringify({}),
         headers: {
           "Content-Type": "application/json",
-          "Auth-Token": authCookie
-        }
-      })
-      const result = await query.json()
-      if( result ){
-        setUser(result)
+          "Auth-Token": authCookie,
+        },
+      });
+      const result = await query.json();
+      if (result) {
+        setUser(result);
       }
     }
-  }
+  };
 
   useEffect(() => {
-    verifyUser()
-  },[])
+    verifyUser();
+  }, []);
 
   return (
     <BrowserRouter>
@@ -44,6 +46,7 @@ function App() {
             <Route path="/signup" element={<SignupPage />} />
           </Routes>
         </div>
+        <Footer />
       </Wrapper>
     </BrowserRouter>
   );

@@ -1,3 +1,4 @@
+
 import '../styles/homepage.css'
 import fair from '../images/fair-date.jpg'
 import icecream from '../images/icecream-date.jpg'
@@ -77,4 +78,4 @@ const HomePage = ({user}) => {
   )
 }
 
-export default HomePage
+export default HomePage;
