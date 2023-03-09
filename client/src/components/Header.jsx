@@ -20,9 +20,9 @@ const Header = ({user}) => {
       <h1>Dating Mapp</h1>
       <nav className="navbar navbar-dark navbar-expand-md bg-body-secondary" data-bs-theme="dark">
         <div className="container-fluid">
-          <head>
+          <div>
             <title>Dating Mapp</title>
-          </head>
+          </div>
           {/* <a className="navbar-brand" href="##">Navbar</a> */}
           <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span className="navbar-toggler-icon"></span>
