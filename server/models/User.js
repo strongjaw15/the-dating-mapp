@@ -1,6 +1,5 @@
 const mongoose = require('mongoose');
 const { Schema, model } = require('mongoose');
-const bcrypt = require('bcrypt');
 
 const userSchema = new Schema({
     name: {
@@ -16,10 +15,10 @@ const userSchema = new Schema({
       type: String,
       required: true,
       unique: true,
-      match: [
-        /^([a-zA-Z0-9\\_\\-\\.]+)@([a-zA-Z]+).(.+)$/,
-        "Email address invalid"
-      ]
+      // match: [
+      //   /^([a-zA-Z0-9\\_\\-\\.]+)@([a-zA-Z]+).(.+)$/,
+      //   "Email address invalid"
+      // ]
     },
     zipCode: {
       type: Number,

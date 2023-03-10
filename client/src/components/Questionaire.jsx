@@ -90,5 +90,4 @@ const Questionaire = ({user}) => {
   )
 }
 
-
 export default Questionaire
