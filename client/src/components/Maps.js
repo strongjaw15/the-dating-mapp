@@ -1,39 +1,33 @@
 import React from "react";
-import GoogleMapReact from "google-map-react";
+import { GoogleMap, LoadScript, Marker } from "@react-google-maps/api";
 
-const AnyReactComponent = ({ text }) => <div>{text}</div>;
+const latPosition = 44.9778;
+const lngPosition = -93.265;
 
-const Maps = () => {
-  const locationLat = 50;
-  const locationLon = 50;
-  const locationName = "Here";
-  const defaultProps = {
-    center: {
-      lat: 44.9778,
-      lng: -93.265,
-    },
-    zoom: 11,
-  };
-  return (
-    // Important! Always set the container height explicitly
-
-    <div style={{ height: "50vh", width: "100%" }}>
-      <GoogleMapReact
-        bootstrapURLKeys={{
-          key: "AIzaSyDMJFn9TYyuqBnvP1laSIZq2FV6nCZiiCM",
-          language: "en",
-        }}
-        defaultCenter={defaultProps.center}
-        defaultZoom={defaultProps.zoom}
-      >
-        <AnyReactComponent
-          lat={locationLat}
-          lng={locationLon}
-          text={locationName}
-        />
-      </GoogleMapReact>
-    </div>
-  );
+const containerStyle = {
+  width: "400px",
+  height: "400px",
 };
 
+const center = {
+  lat: 44.9778,
+  lng: -93.265,
+};
+
+const position = {
+  lat: latPosition,
+  lng: lngPosition,
+};
+// {process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY} "AIzaSyDMJFn9TYyuqBnvP1laSIZq2FV6nCZiiCM"
+function Maps() {
+  return (
+    <LoadScript googleMapsApiKey={process.env.REACT_APP_GOOGLE_MAPS_API_KEY}>
+      <GoogleMap mapContainerStyle={containerStyle} center={center} zoom={10}>
+        <>
+          <Marker position={position} />
+        </>
+      </GoogleMap>
+    </LoadScript>
+  );
+}
 export default Maps;

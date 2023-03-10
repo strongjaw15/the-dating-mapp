@@ -1,10 +1,16 @@
 import { useEffect, useState } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
-import cookie from "js-cookie"
+import cookie from "js-cookie";
 import { Header, Wrapper, Footer, Maps, Questionaire } from "./components";
 
-import { HomePage, LoginPage, ProfilePage, SignupPage } from "./pages";
+import {
+  HomePage,
+  LoginPage,
+  ProfilePage,
+  SignupPage,
+  GetConnected,
+} from "./pages";
 
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./styles/global.css";
@@ -44,6 +50,7 @@ function App() {
             <Route path="/login" element={<LoginPage />} />
             <Route path="/profile" element={<ProfilePage user={user} />} />
             <Route path="/signup" element={<SignupPage />} />
+            <Route path="/get-connected" element={<GetConnected />} />
           </Routes>
         </div>
         <Footer />

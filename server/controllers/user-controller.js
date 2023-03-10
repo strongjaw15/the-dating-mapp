@@ -10,15 +10,37 @@ module.exports = {
     const password = await bcrypt.hash(body.password, salt)
 
     try {
-      const userToInsert = {email: body.email, password: password, name: body.name, location: body.location }
+      const userToInsert = {name: body.name, username: body.username, email: body.email, zipCode: body.zipCode, password: password}
+      console.log(userToInsert)
       const user = await User.create(userToInsert);
       res.status(200).json({ _id: user._id, email: user.email });
     } 
     catch (err) {
+      console.log(err)
       return res.status(400).json({ message: 'Unable to create user' })
     }
     // if( !user ) return res.status(400).json({ message: 'Unable to create user' });
   },
+
+  async getAllUsers(req, res) {
+    const users = await User.find()
+    res.status(200).json(users)
+  },
+
+  getSingleUser(req, res) {
+    User.findOne({ _id: req.params.id })
+        // .select('-__v')
+        // .populate('interests', 'soulMates', 'feedbacks')
+        .then((user) =>
+            !user
+                ? res.status(404).json({ message: 'No user with that ID' })
+                : res.json(user)
+        )
+        .catch((err) => 
+        res.status(500).json(err)
+        );
+  },
+
 
 
   async updateUser({ body, params }, res) {
