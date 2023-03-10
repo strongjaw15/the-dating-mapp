@@ -18,7 +18,7 @@ const position = {
   lat: latPosition,
   lng: lngPosition,
 };
-// {process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY} "AIzaSyDMJFn9TYyuqBnvP1laSIZq2FV6nCZiiCM"
+
 function Maps() {
   return (
     <LoadScript googleMapsApiKey={process.env.REACT_APP_GOOGLE_MAPS_API_KEY}>
