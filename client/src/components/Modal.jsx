@@ -1,9 +1,10 @@
+import '../styles/modal.css'
+
 function Modal(props) {
 
-
   return (
-    <div className="modal">
-      <div className="modal-content">
+    <div className="modal-container">
+      <div className="modal-inner">
         <span className="close" onClick={props.closeModal}>&times;</span>
         <p>{props.message}</p>
       </div>

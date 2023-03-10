@@ -3,6 +3,9 @@ import { Modal } from "../components";
 import { Questionaire } from "../components";
 
 const SignupPage = (props) => {
+
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+
   const defForm = {
     email: "",
     fname: "",
@@ -11,6 +14,7 @@ const SignupPage = (props) => {
     password: "",
     confirmPassword: "",
   };
+
   const [formData, setFormData] = useState(defForm);
   const [signupResult, setSignupResult] = useState("");
   const [showModal, setShowModal] = useState(false);
@@ -43,6 +47,11 @@ const SignupPage = (props) => {
     ) {
       setMessage(`please fill out all forms`);
       openModal();
+    } else if (
+      !emailRegex.test(formData.email)
+    ) {
+      setMessage(`please enter a valid email address`);
+      openModal()
     } else {
       const query = await fetch("/api/user", {
         method: "post",
