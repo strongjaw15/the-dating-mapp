@@ -18,7 +18,7 @@ const Header = ({user}) => {
   return (
     <header className="px-2 pb-0 mb-0" style={{ borderBottom: "1px solid #333" }}>
       <h1>Dating Mapp</h1>
-      <nav className="navbar navbar-dark navbar-expand-md bg-body-secondary" data-bs-theme="dark">
+      <nav className="navbar navbar-light navbar-expand-md bg-body-secondary" data-bs-theme="light">
         <div className="container-fluid">
           <div>
             <title>Dating Mapp</title>
