@@ -10,7 +10,7 @@ module.exports = {
     getSingleFeedback(req, res) {
         Feedback.findOne({ _id: req.params.feedbackId })
             .select('-__v')
-            .populate('reactions')
+            // .populate('reactions')
             .then((feedback) =>
                 !feedback
                     ? res.status(404).json({ message: 'No feedback with that ID' })
