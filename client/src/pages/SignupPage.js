@@ -3,6 +3,9 @@ import { Modal } from "../components";
 import { Questionaire } from "../components";
 
 const SignupPage = (props) => {
+
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+
   const defForm = {
     email: "",
     fname: "",
@@ -11,6 +14,7 @@ const SignupPage = (props) => {
     password: "",
     confirmPassword: "",
   };
+
   const [formData, setFormData] = useState(defForm);
   const [signupResult, setSignupResult] = useState("");
   const [showModal, setShowModal] = useState(false);
@@ -31,7 +35,7 @@ const SignupPage = (props) => {
   const handleFormSubmit = async (e) => {
     e.preventDefault();
     if (formData.password !== formData.confirmPassword) {
-      setMessage(`passwords don't match`);
+      setMessage(`Please enter matching passwords.`);
       openModal();
     } else if (
       formData.email === "" ||
@@ -41,8 +45,13 @@ const SignupPage = (props) => {
       formData.password === "" ||
       formData.confirmPassword === ""
     ) {
-      setMessage(`please fill out all forms`);
+      setMessage(`Please fill out all forms.`);
       openModal();
+    } else if (
+      !emailRegex.test(formData.email)
+    ) {
+      setMessage(`Please enter a valid email address.`);
+      openModal()
     } else {
       const query = await fetch("/api/user", {
         method: "post",
@@ -88,7 +97,7 @@ const SignupPage = (props) => {
             name="fname"
             placeholder="Robin"
             className="form-control"
-            value={formData.username}
+            value={formData.fname}
             onChange={handleInputChange}
           />
         </div>
@@ -112,7 +121,7 @@ const SignupPage = (props) => {
             name="zipcode"
             placeholder="12345"
             className="form-control"
-            value={formData.username}
+            value={formData.zipcode}
             onChange={handleInputChange}
           />
         </div>
