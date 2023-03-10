@@ -1,15 +1,26 @@
 import { useState } from "react"
 import cookie from "js-cookie"
+import {Modal} from '../components'
 
 const LoginPage = (props) => {
 
   const defForm = { email: "", password: "" }
   const [ formData, setFormData ] = useState(defForm)
   const [ loginResult, setLoginResult ] = useState("")
+  const [showModal, setShowModal] = useState(false);
+  const [message, setMessage] = useState("");
 
   const handleInputChange = (e) => {
     setFormData({...formData, [e.target.name]: e.target.value})
   }
+
+  const openModal = () => {
+    setShowModal(true);
+  };
+
+  const closeModal = () => {
+    setShowModal(false);
+  };
 
   const handleFormSubmit = async (e) => {
     console.log(formData)
@@ -27,13 +38,16 @@ const LoginPage = (props) => {
       setLoginResult("success")
       cookie.set("auth-token", result.data.token, { expires: 3 })
     } else {
-      setLoginResult("fail")
+      setMessage(`Please enter valid login credentials.`);
+      openModal()
     }
   }
 
   return (
     <>
       <h1>Login Page</h1>
+
+      {showModal ? <Modal message={message} closeModal={closeModal} /> : null}
 
       <form className="form mb-3">
         <div className="form-group">

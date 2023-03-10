@@ -5,8 +5,7 @@ const { getAllInterests, getSingleInterest, createInterest, updateInterest } = r
 
 // Declare the routes that point to the controllers above
 
-router.route('/').get(getAllInterests);
+router.route('/').get(getAllInterests).post(createInterest);;
 router.route('/:interestId').get(getSingleInterest).put(updateInterest);
-router.route('/:interestId/user/:userID').post(createInterest);
 
 module.exports = router;

@@ -23,10 +23,11 @@ module.exports = {
 
     // Create a new interest
     createInterest(req, res) {
+        console.log(req.body)
         Interest.create(req.body)
             .then((interest) =>
                 User.findOneAndUpdate(
-                    { users: interest.username },
+                    { users: req.body.user },
                     { $set: {interests: interest}},
                     { new: true }
                 )
