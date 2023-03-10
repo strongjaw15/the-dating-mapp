@@ -37,15 +37,15 @@ const HomePage = ({user}) => {
       </div> */}
 
 <Carousel className='size'>
-      <Carousel.Item interval={5000}>
+      <Carousel.Item >
         <img
           className="d-block w-50"
           src={fair}
           alt="First slide"
         />
-        <Carousel.Caption>
-          <h3>First slide label</h3>
-          <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
+        <Carousel.Caption bsPrefix='carousel-text'>
+          <p>"This date was on a whim but I was pleasantly surprised by how much fun I had! Ate awesome food, rode rides, and drank lots of local brews. 10/10 would recommend!"</p>
+          <h3>- danibano</h3>
         </Carousel.Caption>
       </Carousel.Item>
       <Carousel.Item interval={5000}>
@@ -54,9 +54,9 @@ const HomePage = ({user}) => {
           src={icecream}
           alt="Second slide"
         />
-        <Carousel.Caption>
-          <h3>Second slide label</h3>
-          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+        <Carousel.Caption bsPrefix='carousel-text'>
+          <p>"The king of all ice cream shops, they have fun and unique flavors, I didn't even share with my date! Ice cream: 1 Date: 0"</p>
+          <h3>- likemyke</h3>
         </Carousel.Caption>
       </Carousel.Item>
       <Carousel.Item interval={5000}>
@@ -65,11 +65,9 @@ const HomePage = ({user}) => {
           src={camp}
           alt="Third slide"
         />
-        <Carousel.Caption>
-          <h3>Third slide label</h3>
-          <p>
-            Praesent commodo cursus magna, vel scelerisque nisl consectetur.
-          </p>
+        <Carousel.Caption bsPrefix='carousel-text'>
+          <p>"People who hike together, stay together."</p>
+          <h3>- monalisa</h3>
         </Carousel.Caption>
       </Carousel.Item>
     </Carousel>
