@@ -22,6 +22,10 @@ const interestSchema = new Schema(
         movie: {
             type: String,
             required: true,
+        },
+        user: {
+            type: Schema.Types.ObjectId,
+            ref: "User"
         }
     },
 );
