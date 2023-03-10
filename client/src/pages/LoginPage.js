@@ -38,7 +38,6 @@ const LoginPage = (props) => {
       setLoginResult("success")
       cookie.set("auth-token", result.data.token, { expires: 3 })
     } else {
-      setLoginResult("fail")
       setMessage(`Please enter valid login credentials.`);
       openModal()
     }
