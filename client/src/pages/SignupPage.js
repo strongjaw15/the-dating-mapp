@@ -7,6 +7,9 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 
 const SignupPage = (props) => {
+
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+
   const defForm = {
     email: "",
     fname: "",
@@ -15,6 +18,7 @@ const SignupPage = (props) => {
     password: "",
     confirmPassword: "",
   };
+
   const [formData, setFormData] = useState(defForm);
   const [signupResult, setSignupResult] = useState("");
   const [showModal, setShowModal] = useState(false);
@@ -35,7 +39,7 @@ const SignupPage = (props) => {
   const handleFormSubmit = async (e) => {
     e.preventDefault();
     if (formData.password !== formData.confirmPassword) {
-      setMessage(`passwords don't match`);
+      setMessage(`Please enter matching passwords.`);
       openModal();
     } else if (
       formData.email === "" ||
@@ -45,8 +49,13 @@ const SignupPage = (props) => {
       formData.password === "" ||
       formData.confirmPassword === ""
     ) {
-      setMessage(`please fill out all forms`);
+      setMessage(`Please fill out all forms.`);
       openModal();
+    } else if (
+      !emailRegex.test(formData.email)
+    ) {
+      setMessage(`Please enter a valid email address.`);
+      openModal()
     } else {
       const query = await fetch("/api/user", {
         method: "post",
@@ -150,7 +159,7 @@ const SignupPage = (props) => {
             <Questionaire />
           </Col>
         </Row>
-
+        
         <div className="form-group mt-2">
           <button className="btn btn-primary" onClick={handleFormSubmit}>
             Sign Me Up!
