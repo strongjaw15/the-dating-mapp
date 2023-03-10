@@ -35,7 +35,7 @@ const SignupPage = (props) => {
   const handleFormSubmit = async (e) => {
     e.preventDefault();
     if (formData.password !== formData.confirmPassword) {
-      setMessage(`passwords don't match`);
+      setMessage(`Please enter matching passwords.`);
       openModal();
     } else if (
       formData.email === "" ||
@@ -45,12 +45,12 @@ const SignupPage = (props) => {
       formData.password === "" ||
       formData.confirmPassword === ""
     ) {
-      setMessage(`please fill out all forms`);
+      setMessage(`Please fill out all forms.`);
       openModal();
     } else if (
       !emailRegex.test(formData.email)
     ) {
-      setMessage(`please enter a valid email address`);
+      setMessage(`Please enter a valid email address.`);
       openModal()
     } else {
       const query = await fetch("/api/user", {
