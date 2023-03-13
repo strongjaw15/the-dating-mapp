@@ -1,4 +1,5 @@
 const Feedback = require('../models/Feedback');
+const User = require('../models/User');
 
 module.exports = {
     getFeedbacks (req, res) {
@@ -20,25 +21,36 @@ module.exports = {
     },
 
     createFeedback(req, res) {
+        console.log(req.body)
         Feedback.create(req.body)
             .then((feedback) =>
                 User.findOneAndUpdate(
-                    { users: feedback.username },
-                    { $set: {feedbacks: feedback}},
+                    { _id: req.body.user },
+                    { $push: { feedbacks: feedback } },
                     { new: true }
                 )
             )
             .then((user) =>
-            !user
-            ? res.status(404).json({
-                message: 'Feedback created, but no user found',
-                })
-            : res.json(user)
-        )
-        .catch((err) => {
-            console.log(err);
-            res.status(500).json(err);
-        });
+                !user
+                    ? res.status(404).json({
+                        message: 'Feedback created, but no user found',
+                    })
+                    : res.json(user)
+            )
+            .catch((err) => {
+                console.log(err);
+                res.status(500).json(err);
+            });
     },
+
+    deleteFeedback(req, res) {
+        Feedback.findByIdAndDelete({ _id: req.params.feedbackId })
+            .then((feedback) =>
+                !feedback
+                    ? res.status(404).json({ message: 'No feedback with that ID' })
+                    : res.json(feedback)
+            )
+            .catch((err) => res.status(500).json(err));
+    }
 }
 

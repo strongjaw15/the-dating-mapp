@@ -71,6 +71,28 @@ const GetConnected = () => {
       ],
     },
   ];
+  const userID = "aaa";
+  const getSoulMate = () => {
+    const soulMateID = "rockstar";
+    fetch(`/get-connected/${soulMateID}`);
+    return soulMateID;
+  };
+
+  const getLocation = () => {
+    const locationID = "what";
+    fetch(`/get-connected/${locationID}`);
+    return locationID;
+  };
+
+  const displayLocation = () => {
+    fetch(`/get-connected/${userID}/${getLocation}/${getSoulMate}`)
+      .then(function (response) {
+        return response.json();
+      })
+      .then(function (data) {
+        console.log(data);
+      });
+  };
 
   return (
     <>
