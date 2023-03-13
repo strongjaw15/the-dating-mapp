@@ -3,18 +3,21 @@ import DropdownButton from 'react-bootstrap/DropdownButton';
 import {useState} from 'react'
 
 
-const Questionaire = ({user}) => {
+const Questionaire = ({formData, openModal}) => {
 
-  const [ formData, setFormData ] = useState()
+  const [ questionaireData, setQuestionaireData ] = useState()
   const [apple, setApple] = useState('Apple');
   const [season, setSeason] = useState('Season');
   const [bread, setBread] = useState('Bread');
   const [house, setHouse] = useState('House');
   const [movie, setMovie] = useState('Movie');
+  const [message, setMessage] = useState("");
+  const [signupResult, setSignupResult] = useState("");
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
   const handleInputChange = (e) => {
     const { name, textContent } = e.target;
-    setFormData({ ...formData, [name]: textContent });
+    setQuestionaireData({ ...questionaireData, [name]: textContent });
     switch (name) {
       case 'apple':
         setApple(textContent);
@@ -37,9 +40,41 @@ const Questionaire = ({user}) => {
   };
 
   const handleFormSubmit = async (e) => {
-    e.preventDefault()
-    console.log(formData)
-  }
+    e.preventDefault();
+    if (formData.password !== formData.confirmPassword) {
+      setMessage(`Please enter matching passwords.`);
+      openModal();
+    } else if (
+      formData.email === "" ||
+      formData.name === "" ||
+      formData.username === "" ||
+      formData.zipCode === "" ||
+      formData.password === "" ||
+      formData.confirmPassword === ""
+    ) {
+      setMessage(`Please fill out all forms.`);
+      openModal();
+    } else if (!emailRegex.test(formData.email)) {
+      setMessage(`Please enter a valid email address.`);
+      openModal();
+    } else {
+      const query = await fetch("/api/user", {
+        method: "post",
+        body: JSON.stringify(formData),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+
+      if (!query.ok) {
+        setSignupResult("fail");
+      } else {
+        const result = await query.json();
+        setSignupResult("success");
+        console.log(result);
+      }
+    }
+  };
 
   return (
 
@@ -86,7 +121,13 @@ const Questionaire = ({user}) => {
             <Dropdown.Item name="movie" onClick={handleInputChange}>Hereditary</Dropdown.Item>
           </DropdownButton>
         </Dropdown>
+        <div className="form-group mt-2">
+            <button className="btn btn-primary" onClick={handleFormSubmit}>
+              Sign Me Up!
+            </button>
+          </div>
       </div>
+      
   )
 }
 
