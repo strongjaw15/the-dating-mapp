@@ -1,20 +1,19 @@
 import { useState } from "react";
 import { Modal } from "../components";
 import { Questionaire } from "../components";
-import '../styles/signup.css'
-import Container from 'react-bootstrap/Container';
-import Row from 'react-bootstrap/Row';
-import Col from 'react-bootstrap/Col';
+import "../styles/signup.css";
+import Container from "react-bootstrap/Container";
+import Row from "react-bootstrap/Row";
+import Col from "react-bootstrap/Col";
 
 const SignupPage = (props) => {
-
-  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
   const defForm = {
     email: "",
-    fname: "",
+    name: "",
     username: "",
-    zipcode: "",
+    zipCode: "",
     password: "",
     confirmPassword: "",
   };
@@ -34,45 +33,6 @@ const SignupPage = (props) => {
 
   const closeModal = () => {
     setShowModal(false);
-  };
-
-  const handleFormSubmit = async (e) => {
-    e.preventDefault();
-    if (formData.password !== formData.confirmPassword) {
-      setMessage(`Please enter matching passwords.`);
-      openModal();
-    } else if (
-      formData.email === "" ||
-      formData.fname === "" ||
-      formData.username === "" ||
-      formData.zipcode === "" ||
-      formData.password === "" ||
-      formData.confirmPassword === ""
-    ) {
-      setMessage(`Please fill out all forms.`);
-      openModal();
-    } else if (
-      !emailRegex.test(formData.email)
-    ) {
-      setMessage(`Please enter a valid email address.`);
-      openModal()
-    } else {
-      const query = await fetch("/api/user", {
-        method: "post",
-        body: JSON.stringify(formData),
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
-
-      if (!query.ok) {
-        setSignupResult("fail");
-      } else {
-        const result = await query.json();
-        setSignupResult("success");
-        console.log(result);
-      }
-    }
   };
 
   return (
@@ -98,13 +58,13 @@ const SignupPage = (props) => {
             </div>
 
             <div className="form-group">
-              <label>First Name</label>
+              <label>Name</label>
               <input
                 type="text"
-                name="fname"
+                name="name"
                 placeholder="Robin"
                 className="form-control"
-                value={formData.fname}
+                value={formData.name}
                 onChange={handleInputChange}
               />
             </div>
@@ -125,10 +85,10 @@ const SignupPage = (props) => {
               <label>Zipcode</label>
               <input
                 type="number"
-                name="zipcode"
+                name="zipCode"
                 placeholder="12345"
                 className="form-control"
-                value={formData.zipcode}
+                value={formData.zipCode}
                 onChange={handleInputChange}
               />
             </div>
@@ -153,6 +113,7 @@ const SignupPage = (props) => {
                 value={formData.confirmPassword}
                 onChange={handleInputChange}
               />
+
             </div>
           </Col>
           <Col sm={12} lg={6} className='card'>
@@ -178,6 +139,7 @@ const SignupPage = (props) => {
           Signup failed!
         </div>
       )}
+
       </Container>
     </>
   );

@@ -2,7 +2,7 @@ import { useState } from "react"
 import cookie from "js-cookie"
 import {Modal} from '../components'
 
-const LoginPage = (props) => {
+const LoginPage = () => {
 
   const defForm = { email: "", password: "" }
   const [ formData, setFormData ] = useState(defForm)
@@ -55,7 +55,7 @@ const LoginPage = (props) => {
           <input   
             type="text"
             name="email"
-            placeholder="john@gmail.com"
+            placeholder="user@email.com"
             className="form-control"
             value={formData.email}
             onChange={handleInputChange}

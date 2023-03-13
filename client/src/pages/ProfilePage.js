@@ -10,27 +10,38 @@ const ProfilePage = ({user}) => {
 
   const update = async (e) => {
     e?.preventDefault()
+  
+    // Remove password field if it's empty
+    const data = { ...formData }
+    if (!data.password) {
+      delete data.password
+    } else if (!data.email) {
+      delete data.email
+    } else if (!data.name) {
+      delete data.name
+    }else if (!data.location) {
+      delete data.location
+    }
+  
     const resp = await fetch(`/api/user/${user._id}`, {
       method: "PUT",
-      body: JSON.stringify(formData),
+      body: JSON.stringify(data),
       headers: {
         "Content-Type": "application/json"
       }
     })
-    if( !resp.ok ){
+    if (!resp.ok) {
       return setUpdateResult("fail")
     }
     setUpdateResult("success")
   }
-
+  
   useEffect(() => {
     if( user ) setFormData({ ...formData, email: user.email, 
       name: user.name, location: user.location 
     })
-    // if( user?.name ) setFormData({ ...formData, name: user.name})
-
-  }, [user])
-
+  }, [user, formData])
+  
   return (
     <>
       <h1>Your Profile</h1>
@@ -43,6 +54,7 @@ const ProfilePage = ({user}) => {
               type="text" 
               className="form-control" 
               name="email" 
+              placeholder={user?.email}
               value={formData.email} 
               onChange={handleInputChange}
             />
@@ -53,16 +65,18 @@ const ProfilePage = ({user}) => {
               type="text" 
               className="form-control" 
               name="name" 
+              placeholder={user?.name}
               value={formData.name} 
               onChange={handleInputChange}
             />
           </div>
           <div className="form-group mb-2">
-            <label>Location</label>
+            <label>Zip Code</label>
             <input 
-              type="text" 
+              type="number" 
               className="form-control" 
               name="location" 
+              placeholder={user?.location}
               value={formData.location} 
               onChange={handleInputChange}
             />
