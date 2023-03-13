@@ -44,7 +44,6 @@ function App() {
     <BrowserRouter>
       <Wrapper>
         <Header user={user} />
-        <div className="pt-3 px-4">
           <Routes>
             <Route path="/" element={<HomePage user={user} />} />
             <Route path="/login" element={<LoginPage />} />
@@ -52,7 +51,6 @@ function App() {
             <Route path="/signup" element={<SignupPage />} />
             <Route path="/get-connected" element={<GetConnected />} />
           </Routes>
-        </div>
         <Footer />
       </Wrapper>
     </BrowserRouter>

@@ -37,13 +37,14 @@ const SignupPage = (props) => {
 
   return (
     <>
-      <h1>give us the deets</h1>
+    
+      {/* <h1>give us the deets</h1> */}
 
       {showModal ? <Modal message={message} closeModal={closeModal} /> : null}
       <Container>
       <form className="form mb-3">
         <Row>
-          <Col sm={12} lg={6} className='flex justify-content-center'>
+          <Col sm={12} lg={5} className='card'>
             <div className="form-group">
               <label>Email Address</label>
               <input
@@ -112,21 +113,33 @@ const SignupPage = (props) => {
                 value={formData.confirmPassword}
                 onChange={handleInputChange}
               />
-            </Col>
-          </Row>
-        </form>
 
-        {signupResult === "success" && (
-          <div className="alert alert-success" role="alert">
-            Signup successful!
-          </div>
-        )}
+            </div>
+          </Col>
+          <Col sm={12} lg={6} className='card'>
+            <Questionaire />
+          </Col>
+        </Row>
+        
+        <div className="form-group mt-2">
+          <button className="btn btn-primary" onClick={handleFormSubmit}>
+            Sign Me Up!
+          </button>
+        </div>
+      </form>
 
-        {signupResult === "fail" && (
-          <div className="alert alert-danger" role="alert">
-            Signup failed!
-          </div>
-        )}
+      {signupResult === "success" && (
+        <div className="alert alert-success" role="alert">
+          Signup successful!
+        </div>
+      )}
+
+      {signupResult === "fail" && (
+        <div className="alert alert-danger" role="alert">
+          Signup failed!
+        </div>
+      )}
+
       </Container>
     </>
   );
