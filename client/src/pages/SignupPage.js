@@ -63,7 +63,7 @@ const SignupPage = (props) => {
                 name="name"
                 placeholder="Robin"
                 className="form-control"
-                value={formData.fname}
+                value={formData.name}
                 onChange={handleInputChange}
               />
             </div>
@@ -87,7 +87,7 @@ const SignupPage = (props) => {
                 name="zipCode"
                 placeholder="12345"
                 className="form-control"
-                value={formData.zipcode}
+                value={formData.zipCode}
                 onChange={handleInputChange}
               />
             </div>
