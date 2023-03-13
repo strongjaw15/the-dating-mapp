@@ -46,9 +46,11 @@ const Questionaire = ({formData, openModal}) => {
       openModal();
     } else if (
       formData.email === "" ||
-      formData.fname === "" ||
+
+      formData.name === "" ||
       formData.username === "" ||
-      formData.zipcode === "" ||
+      formData.zipCode === "" ||
+
       formData.password === "" ||
       formData.confirmPassword === ""
     ) {
