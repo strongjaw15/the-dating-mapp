@@ -78,13 +78,13 @@ const SignupPage = (props) => {
   return (
     <>
     
-      <h1>give us the deets</h1>
+      {/* <h1>give us the deets</h1> */}
 
       {showModal ? <Modal message={message} closeModal={closeModal} /> : null}
       <Container>
       <form className="form mb-3">
         <Row>
-          <Col sm={12} lg={6} className='flex justify-content-center'>
+          <Col sm={12} lg={5} className='card'>
             <div className="form-group">
               <label>Email Address</label>
               <input
@@ -155,7 +155,7 @@ const SignupPage = (props) => {
               />
             </div>
           </Col>
-          <Col sm={12} lg={6}>
+          <Col sm={12} lg={6} className='card'>
             <Questionaire />
           </Col>
         </Row>
