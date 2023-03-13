@@ -97,8 +97,10 @@ const GetConnected = () => {
   return (
     <>
       <h1>Get Connected</h1>
-
-      <Maps />
+      <div>
+        <Maps />
+      </div>
+    
       <div className="connected-people">
         {userData.map((user) => (
           <div key={user.id} className="connected-person">

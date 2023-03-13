@@ -66,7 +66,7 @@ const HomePage = ({user}) => {
           alt="Third slide"
         />
         <Carousel.Caption bsPrefix='carousel-text'>
-          <p>"People who hike together, stay together."</p>
+          <p>"We went up the trail together, then we did some of my hiking rituals but I came back down the trail alone."</p>
           <h3>- monalisa</h3>
         </Carousel.Caption>
       </Carousel.Item>
