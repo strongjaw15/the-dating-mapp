@@ -1,14 +1,13 @@
 import { useState } from "react";
 import { Modal } from "../components";
 import { Questionaire } from "../components";
-import '../styles/signup.css'
-import Container from 'react-bootstrap/Container';
-import Row from 'react-bootstrap/Row';
-import Col from 'react-bootstrap/Col';
+import "../styles/signup.css";
+import Container from "react-bootstrap/Container";
+import Row from "react-bootstrap/Row";
+import Col from "react-bootstrap/Col";
 
 const SignupPage = (props) => {
-
-  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
   const defForm = {
     email: "",
@@ -36,50 +35,8 @@ const SignupPage = (props) => {
     setShowModal(false);
   };
 
-  const handleFormSubmit = async (e) => {
-    e.preventDefault();
-    if (formData.password !== formData.confirmPassword) {
-      setMessage(`Please enter matching passwords.`);
-      openModal();
-    } else if (
-      formData.email === "" ||
-      formData.name === "" ||
-      formData.username === "" ||
-      formData.zipCode === "" ||
-      formData.password === "" ||
-      formData.confirmPassword === ""
-    ) {
-      setMessage(`Please fill out all forms.`);
-      openModal();
-    } else if (
-      !emailRegex.test(formData.email)
-    ) {
-      setMessage(`Please enter a valid email address.`);
-      openModal()
-    } else {
-      const query = await fetch("/api/user", {
-        method: "post",
-        body: JSON.stringify(formData),
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
-
-      
-
-      if (!query.ok) {
-        setSignupResult("fail");
-      } else {
-        const result = await query.json();
-        setSignupResult("success");
-        console.log(result);
-      }
-    }
-  };
-
   return (
     <>
-    
       <h1>give us the deets</h1>
 
       {showModal ? <Modal message={message} closeModal={closeModal} /> : null}
@@ -155,31 +112,21 @@ const SignupPage = (props) => {
                 value={formData.confirmPassword}
                 onChange={handleInputChange}
               />
-            </div>
-          </Col>
-          <Col sm={12} lg={6}>
-            <Questionaire />
-          </Col>
-        </Row>
-        
-        <div className="form-group mt-2">
-          <button className="btn btn-primary" onClick={handleFormSubmit}>
-            Sign Me Up!
-          </button>
-        </div>
-      </form>
+            </Col>
+          </Row>
+        </form>
 
-      {signupResult === "success" && (
-        <div className="alert alert-success" role="alert">
-          Signup successful!
-        </div>
-      )}
+        {signupResult === "success" && (
+          <div className="alert alert-success" role="alert">
+            Signup successful!
+          </div>
+        )}
 
-      {signupResult === "fail" && (
-        <div className="alert alert-danger" role="alert">
-          Signup failed!
-        </div>
-      )}
+        {signupResult === "fail" && (
+          <div className="alert alert-danger" role="alert">
+            Signup failed!
+          </div>
+        )}
       </Container>
     </>
   );
