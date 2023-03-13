@@ -12,9 +12,9 @@ const SignupPage = (props) => {
 
   const defForm = {
     email: "",
-    fname: "",
+    name: "",
     username: "",
-    zipcode: "",
+    zipCode: "",
     password: "",
     confirmPassword: "",
   };
@@ -43,9 +43,9 @@ const SignupPage = (props) => {
       openModal();
     } else if (
       formData.email === "" ||
-      formData.fname === "" ||
+      formData.name === "" ||
       formData.username === "" ||
-      formData.zipcode === "" ||
+      formData.zipCode === "" ||
       formData.password === "" ||
       formData.confirmPassword === ""
     ) {
@@ -64,6 +64,8 @@ const SignupPage = (props) => {
           "Content-Type": "application/json",
         },
       });
+
+      
 
       if (!query.ok) {
         setSignupResult("fail");
@@ -98,10 +100,10 @@ const SignupPage = (props) => {
             </div>
 
             <div className="form-group">
-              <label>First Name</label>
+              <label>Name</label>
               <input
                 type="text"
-                name="fname"
+                name="name"
                 placeholder="Robin"
                 className="form-control"
                 value={formData.fname}
@@ -125,7 +127,7 @@ const SignupPage = (props) => {
               <label>Zipcode</label>
               <input
                 type="number"
-                name="zipcode"
+                name="zipCode"
                 placeholder="12345"
                 className="form-control"
                 value={formData.zipcode}
