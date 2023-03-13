@@ -27,7 +27,7 @@ module.exports = {
         Interest.create(req.body)
             .then((interest) =>
                 User.findOneAndUpdate(
-                    { users: req.body.user },
+                    { _id: req.body.user },
                     { $set: {interests: interest}},
                     { new: true }
                 )
