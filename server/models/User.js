@@ -41,7 +41,7 @@ const userSchema = new Schema({
         ref: 'User'
       }
     ],
-    feedback: [
+    feedbacks: [
       {
         type: Schema.Types.ObjectId,
         ref: "Feedback",
