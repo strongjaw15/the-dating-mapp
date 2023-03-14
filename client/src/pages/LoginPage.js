@@ -37,6 +37,7 @@ const LoginPage = () => {
     if( result && !result.err && result.data && result.data.token ){
       setLoginResult("success")
       cookie.set("auth-token", result.data.token, { expires: 3 })
+      window.location.href = "/get-connected"
     } else {
       setMessage(`Please enter valid login credentials.`);
       openModal()
