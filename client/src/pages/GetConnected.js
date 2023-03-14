@@ -1,79 +1,12 @@
 import { Maps } from "../components";
+import { useState, useEffect } from "react";
 
 const GetConnected = ({ user }) => {
-  const userData = [
-    {
-      id: 1,
-      name: "Ziggy Stardust",
-      username: "ziggy",
-      email: "ziggy@yahoo.com",
-      zipCode: 555101,
-      password: "password",
-      interests: [
-        {
-          apple: "Granny Smith",
-          season: "Fall",
-          bread: "Sourdough",
-          house: "Slytherin",
-          movie: "Midsommer",
-        },
-      ],
-    },
-    {
-      id: 2,
-      name: "David Bowie",
-      username: "davidbowie",
-      email: "david@yahoo.com",
-      zipCode: 55044,
-      password: "password",
-      interests: [
-        {
-          apple: "Golden Delicious",
-          season: "Summer",
-          bread: "Wheat",
-          house: "Hufflepuff",
-          movie: "The Village",
-        },
-      ],
-    },
-    {
-      id: 3,
-      name: "Lily Allen",
-      username: "lilyallen",
-      email: "lily@yahoo.com",
-      zipCode: 55101,
-      password: "password",
-      interests: [
-        {
-          apple: "Golden Delicious",
-          season: "Winter",
-          bread: "Rye",
-          house: "Ravenclaw",
-          movie: "Them That Follow",
-        },
-      ],
-    },
-    {
-      id: 4,
-      name: "Stevie Nicks",
-      username: "stevienicks",
-      email: "stevie@yahoo.com",
-      zipCode: 55101,
-      password: "password",
-      interests: [
-        {
-          apple: "Gala",
-          season: "Spring",
-          bread: "Pumpernickle",
-          house: "Gryffindor",
-          movie: "Hereditary",
-        },
-      ],
-    },
-  ];
+  const [yourSoulMate, setSoulMate] = useState({});
+  const [yourLocation, setLocation] = useState({});
 
   function getRandomNumber(x) {
-    return Math.floor(Math.random() * (x + 1));
+    return Math.floor(Math.random() * x);
   }
 
   const getSoulMate = async () => {
@@ -87,50 +20,59 @@ const GetConnected = ({ user }) => {
       console.log("There are no users in the database");
     } else {
       const result = await query.json();
-      const userInterests = await user.interestScore;
-      console.log(result[18].interestScore);
       const possible = result.filter(
-        (user) => user.interestScore === userInterests
+        (soulMate) => soulMate.interestScore === user.interestScore
       );
-      const randomUser = getRandomNumber(possible.length);
-      console.log("hi");
+
+      const randomUser = possible[getRandomNumber(possible.length)];
+      const soulMateQuery = await fetch(`/api/get-connected/${randomUser._id}`);
+      if (!soulMateQuery.ok) {
+        console.log("There are no matches in the database");
+      } else {
+        const soulMate = await soulMateQuery.json();
+        setSoulMate(soulMate);
+      }
     }
   };
-  const getLocation = () => {
-    const locationID = "what";
-    fetch(`/get-connected/${locationID}`);
-    return locationID;
+
+  const getLocation = async () => {
+    const query = await fetch("/api/get-connected/location", {
+      method: "get",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    if (!query.ok) {
+      console.log("There are no locations in the database");
+    } else {
+      const result = await query.json();
+      const randomLocation = result[getRandomNumber(result.length)];
+      setLocation(randomLocation);
+    }
   };
 
-  const displayLocation = () => {
-    fetch(`/get-connected/${user._id}/${getLocation}/${getSoulMate}`)
-      .then(function (response) {
-        return response.json();
-      })
-      .then(function (data) {
-        console.log(data);
-      });
-  };
-
-  getSoulMate();
+  useEffect(() => {
+    getSoulMate();
+    getLocation();
+  }, []);
 
   return (
     <>
       <h1>Get Connected</h1>
       <div>
-        <Maps />
+        <Maps yourLocation={yourLocation} />
       </div>
 
       <div className="connected-people">
-        {userData.map((user) => (
-          <div key={user.id} className="connected-person">
-            <h2>{user.name}</h2>
-            <p>{user.zipCode}</p>
-          </div>
-        ))}
+        <p>Your Soul Mate is: {yourSoulMate.name}!</p>
       </div>
 
-      <div className="connected-places"></div>
+      <div className="connected-places">
+        <p>
+          You and {yourSoulMate.name} should meet up at the {yourLocation.name},
+          a {yourLocation.type} at {yourLocation.address}.
+        </p>
+      </div>
     </>
   );
 };

@@ -121,6 +121,7 @@ module.exports = {
       email: user.email,
       name: user.name,
       zipCode: user.zipCode,
+      interestScore: user.interestScore,
     });
   },
 };

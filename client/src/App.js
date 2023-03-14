@@ -50,7 +50,10 @@ function App() {
           <Route path="/login" element={<LoginPage />} />
           <Route path="/profile" element={<ProfilePage user={user} />} />
           <Route path="/signup" element={<SignupPage />} />
-          <Route path="/get-connected" element={<GetConnected user={user} />} />
+          <Route
+            path="/get-connected"
+            element={user && <GetConnected user={user} />}
+          />
         </Routes>
         <Footer />
       </Wrapper>
