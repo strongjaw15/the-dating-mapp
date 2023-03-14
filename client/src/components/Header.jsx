@@ -29,11 +29,11 @@ const Header = ({user}) => {
           <img src={logo} alt='map' className='logo'/>
         </div>
         <div className='options'>
-        <Navbar stacked bg="white" expand="lg">
+        <Navbar bg="white" expand="lg">
           <Container>
             <Navbar.Toggle aria-controls="basic-navbar-nav" />
             <Navbar.Collapse id="basic-navbar-nav">
-              <Nav className="me-auto">
+              <Nav className="me-auto flex-column">
                 <Nav.Link href="/">Home</Nav.Link>
 
                 { !user ? (
