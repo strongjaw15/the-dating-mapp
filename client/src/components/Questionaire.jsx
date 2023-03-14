@@ -39,7 +39,6 @@ const Questionaire = ({formData, openModal, setMessage, setSignupResult}) => {
   };
 
   const setInterestScore = () => {
-    console.log(questionaireData)
     switch (questionaireData.apple) {
       case "Granny Smith":
         interestScore += 1
@@ -144,8 +143,8 @@ const Questionaire = ({formData, openModal, setMessage, setSignupResult}) => {
     }
     else {
       setInterestScore()
-      questionaireData.interestScore = interestScore
-      console.log(formData)
+      formData.interestScore = interestScore
+      console.log("questionaire", questionaireData)
       const query = await fetch("/api/user", {
         method: "post",
         body: JSON.stringify(formData),

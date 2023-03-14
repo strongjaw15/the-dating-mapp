@@ -22,10 +22,6 @@ const interestSchema = new Schema({
     type: String,
     required: true,
   },
-  interestScore: {
-    type: Number,
-    required: true,
-  },
   user: {
     type: Schema.Types.ObjectId,
     ref: "User",
