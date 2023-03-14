@@ -8,6 +8,7 @@ const userData = [
         email: "ziggy@yahoo.com",
         zipCode: 555101,
         password: "password",
+        interestScore: 7
     },
     {
         name: "David Bowie",
@@ -15,6 +16,7 @@ const userData = [
         email: "david@yahoo.com",
         zipCode: 55044,
         password: "password",
+        interestScore: 7
     },
     {
         name: "Lily Allen",
@@ -22,6 +24,7 @@ const userData = [
         email: "lily@yahoo.com",
         zipCode: 55101,
         password: "password",
+        interestScore: 7
     },
     {
         name: "Stevie Nicks",
@@ -29,6 +32,7 @@ const userData = [
         email: "stevie@yahoo.com",
         zipCode: 55101,
         password: "password",
+        interestScore: 7
     },
 
 ];
