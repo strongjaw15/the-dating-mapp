@@ -152,6 +152,7 @@ const Questionaire = ({formData, openModal, setMessage, setSignupResult}) => {
           "Content-Type": "application/json",
         },
       });
+      
       if (!query.ok) {
         setSignupResult("fail");
       } else {
@@ -165,11 +166,11 @@ const Questionaire = ({formData, openModal, setMessage, setSignupResult}) => {
             "Content-Type": "application/json",
           },
         });
-        if(!questionQuery.ok){
-          const questionResult = await questionQuery.json()
-          console.log(questionResult)
-          setSignupResult("success");
+        if (questionQuery.ok) {
+          const questionResult = await questionQuery.json();
+          console.log(questionResult);
         }
+        setSignupResult("success");
       }
     }
   };
