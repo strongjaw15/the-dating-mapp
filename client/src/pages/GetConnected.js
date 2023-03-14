@@ -1,6 +1,6 @@
 import { Maps } from "../components";
 
-const GetConnected = () => {
+const GetConnected = ({ user }) => {
   const userData = [
     {
       id: 1,
@@ -71,13 +71,31 @@ const GetConnected = () => {
       ],
     },
   ];
-  const userID = "aaa";
-  const getSoulMate = () => {
-    const soulMateID = "rockstar";
-    fetch(`/get-connected/${soulMateID}`);
-    return soulMateID;
-  };
 
+  function getRandomNumber(x) {
+    return Math.floor(Math.random() * (x + 1));
+  }
+
+  const getSoulMate = async () => {
+    const query = await fetch("/api/user", {
+      method: "get",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    if (!query.ok) {
+      console.log("There are no users in the database");
+    } else {
+      const result = await query.json();
+      const userInterests = await user.interestScore;
+      console.log(result[18].interestScore);
+      const possible = result.filter(
+        (user) => user.interestScore === userInterests
+      );
+      const randomUser = getRandomNumber(possible.length);
+      console.log("hi");
+    }
+  };
   const getLocation = () => {
     const locationID = "what";
     fetch(`/get-connected/${locationID}`);
@@ -85,7 +103,7 @@ const GetConnected = () => {
   };
 
   const displayLocation = () => {
-    fetch(`/get-connected/${userID}/${getLocation}/${getSoulMate}`)
+    fetch(`/get-connected/${user._id}/${getLocation}/${getSoulMate}`)
       .then(function (response) {
         return response.json();
       })
@@ -94,13 +112,15 @@ const GetConnected = () => {
       });
   };
 
+  getSoulMate();
+
   return (
     <>
       <h1>Get Connected</h1>
       <div>
         <Maps />
       </div>
-    
+
       <div className="connected-people">
         {userData.map((user) => (
           <div key={user.id} className="connected-person">
@@ -114,5 +134,4 @@ const GetConnected = () => {
     </>
   );
 };
-
 export default GetConnected;

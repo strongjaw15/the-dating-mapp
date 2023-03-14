@@ -39,7 +39,6 @@ const Questionaire = ({formData, openModal, setMessage, setSignupResult}) => {
   };
 
   const setInterestScore = () => {
-    console.log(questionaireData)
     switch (questionaireData.apple) {
       case "Granny Smith":
         interestScore += 1
@@ -144,8 +143,8 @@ const Questionaire = ({formData, openModal, setMessage, setSignupResult}) => {
     }
     else {
       setInterestScore()
-      questionaireData.interestScore = interestScore
-      console.log(formData)
+      formData.interestScore = interestScore
+      console.log("questionaire", questionaireData)
       const query = await fetch("/api/user", {
         method: "post",
         body: JSON.stringify(formData),
@@ -153,6 +152,7 @@ const Questionaire = ({formData, openModal, setMessage, setSignupResult}) => {
           "Content-Type": "application/json",
         },
       });
+      
       if (!query.ok) {
         setSignupResult("fail");
       } else {
@@ -166,11 +166,11 @@ const Questionaire = ({formData, openModal, setMessage, setSignupResult}) => {
             "Content-Type": "application/json",
           },
         });
-        if(!questionQuery.ok){
-          const questionResult = await questionQuery.json()
-          console.log(questionResult)
-          setSignupResult("success");
+        if (questionQuery.ok) {
+          const questionResult = await questionQuery.json();
+          console.log(questionResult);
         }
+        setSignupResult("success");
       }
     }
   };
