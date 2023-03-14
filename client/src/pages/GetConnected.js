@@ -1,5 +1,10 @@
 import { Maps } from "../components";
+
+import Carousel from 'react-bootstrap/Carousel';
+import person from '../images/person.png'
+import '../styles/getConnected.css'
 import { useState, useEffect } from "react";
+
 
 const GetConnected = ({ user }) => {
   const [yourSoulMate, setSoulMate] = useState([]);
@@ -76,17 +81,48 @@ const GetConnected = ({ user }) => {
   }, []);
 
   return (
-    <>
-      <h1>Get Connected</h1>
-      <div>
+
+    <div className="page">
+      {/* <h1>Get Connected</h1> */}
+      <div className="maps">
         <Maps yourLocation={yourLocation} />
       </div>
+    
+      {/* <div className="connected-people">
+        {userData.map((user) => (
+          <div key={user.id} className="connected-person">
+            <h2>{user.name}</h2>
+            <p>{user.zipCode}</p>
+          </div>
+        ))}
+      </div> */}
 
+      <div className="connected-people">
+
+        <Carousel>
+        {userData.map((user) => (
+              <Carousel.Item key={user.id} >
+              <img
+                className="d-block w-100"
+                src={person}
+                alt="First slide"
+              />
+              <Carousel.Caption>
+                <h3>{user.name}</h3>
+                <p>{user.zipCode}</p>
+              </Carousel.Caption>
+            </Carousel.Item>
+        ))}
+        </Carousel>
+      </div>
+      {/* <div className="connected-places"></div> */}
+      
       <div className="connected-people">
         <p>
           Your potential Soul Mates are:
           {yourSoulMate.map((soulMate) => soulMate.name)}!
         </p>
+
       </div>
 
       <div className="connected-places">
@@ -95,7 +131,8 @@ const GetConnected = ({ user }) => {
           a {yourLocation.type} at {yourLocation.address} at 6:37PM tomorrow.
         </p>
       </div>
-    </>
+    </div>
+
   );
 };
 export default GetConnected;

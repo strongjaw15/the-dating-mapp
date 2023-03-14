@@ -1,0 +1,23 @@
+.page {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.connected-people {
+    width: 40%;
+}
+
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+  background-color:#C9C0F5 ;
+  border-radius: 0.5rem;
+}
+
+.carousel-indicators button {
+    background-color: #98D7FF !important;
+}
+
+.carousel-caption {
+    -webkit-text-stroke: 1px black;
+}

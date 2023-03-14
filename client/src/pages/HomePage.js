@@ -1,9 +1,9 @@
-
 import '../styles/homepage.css'
 import fair from '../images/fair-date.jpg'
 import icecream from '../images/icecream-date.jpg'
 import camp from '../images/camp-date.jpg'
 import Carousel from 'react-bootstrap/Carousel';
+
 
 
 const HomePage = ({user}) => {
@@ -19,14 +19,12 @@ const HomePage = ({user}) => {
               <p>so much fun at the state fair.</p>
             </div>
           </div>
-
           <div className='card'>
             <img src= {icecream} alt='icecream' />
             <div className='container'>
               <p>phone eat first</p>
             </div>
           </div>
-
           <div className='card'>
             <img src= {camp} alt='camp' />
             <div className='container'>
@@ -37,7 +35,7 @@ const HomePage = ({user}) => {
       </div> */}
 
 <Carousel className='size'>
-      <Carousel.Item >
+      <Carousel.Item interval={5000}>
         <img
           className="d-block w-50"
           src={fair}
