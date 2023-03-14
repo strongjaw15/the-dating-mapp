@@ -153,26 +153,46 @@ const Questionaire = ({formData, openModal, setMessage, setSignupResult}) => {
           "Content-Type": "application/json",
         },
       });
-      if (!query.ok) {
-        setSignupResult("fail");
-      } else {
-        const result = await query.json();
-        console.log(result)
-        questionaireData.user = result._id
-        const questionQuery = await fetch("/api/interest", {
-          method: "post",
-          body: JSON.stringify(questionaireData),
-          headers: {
-            "Content-Type": "application/json",
-          },
-        });
-        if(!questionQuery.ok){
-          const questionResult = await questionQuery.json()
-          console.log(questionResult)
-          setSignupResult("success");
+      // if (!query.ok) {
+      //   setSignupResult("fail");
+      // } else {
+      //   const result = await query.json();
+      //   console.log(result)
+      //   questionaireData.user = result._id
+      //   const questionQuery = await fetch("/api/interest", {
+      //     method: "post",
+      //     body: JSON.stringify(questionaireData),
+      //     headers: {
+      //       "Content-Type": "application/json",
+      //     },
+      //   });
+      //   if(!questionQuery.ok){
+      //     const questionResult = await questionQuery.json()
+      //     console.log(questionResult)
+      //     setSignupResult("success");
+      //   }
+      // }
+
+          if (!query.ok) {
+            setSignupResult("fail");
+          } else {
+            const result = await query.json();
+            console.log(result)
+            questionaireData.user = result._id
+            const questionQuery = await fetch("/api/interest", {
+              method: "post",
+              body: JSON.stringify(questionaireData),
+              headers: {
+                "Content-Type": "application/json",
+              },
+            });
+            if (questionQuery.ok) {
+              const questionResult = await questionQuery.json();
+              console.log(questionResult);
+            }
+            setSignupResult("success");
+          }
         }
-      }
-    }
   };
 
   return (
