@@ -1,0 +1,30 @@
+[
+  {
+      "apple": "Granny Smith",
+      "season": "Fall",
+      "bread": "Sourdough",
+      "house": "Slytherin",
+      "movie": "Midsommer"
+  },
+  {
+      "apple": "Golden Delicious",
+      "season": "Summer",
+      "bread": "Wheat",
+      "house": "Hufflepuff",
+      "movie": "The Village"
+  },
+  {
+      "apple": "Golden Delicious",
+      "season": "Winter",
+      "bread": "Rye",
+      "house": "Ravenclaw",
+      "movie": "Them That Follow"
+  },
+  {
+      "apple": "Gala",
+      "season": "Spring",
+      "bread": "Pumpernickle",
+      "house": "Gryffindor",
+      "movie": "Hereditary"
+  }
+]

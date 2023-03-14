@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react"
 
 const ProfilePage = ({user}) => {
-  const [ formData, setFormData ] = useState({ email: "", password: "", name: "", location: "" })
+  const [ formData, setFormData ] = useState({ email: "", password: "", name: "", zipCode: "" })
   const [ updateResult, setUpdateResult ] = useState("")
 
   const handleInputChange = (e) => {
@@ -19,8 +19,8 @@ const ProfilePage = ({user}) => {
       delete data.email
     } else if (!data.name) {
       delete data.name
-    }else if (!data.location) {
-      delete data.location
+    }else if (data.zipCode === null) {
+      delete data.zipCode
     }
   
     const resp = await fetch(`/api/user/${user._id}`, {
@@ -34,13 +34,26 @@ const ProfilePage = ({user}) => {
       return setUpdateResult("fail")
     }
     setUpdateResult("success")
+    console.log(formData)
   }
-  
+
   useEffect(() => {
-    if( user ) setFormData({ ...formData, email: user.email, 
-      name: user.name, location: user.location 
-    })
-  }, [user, formData])
+    if (user) {
+      console.log(formData)
+      setFormData(formData => ({
+        ...formData,
+        email: user.email,
+        name: user.name,
+        zipCode: user.zipCode,
+      }));
+    }
+  }, [user], formData);
+  
+  // useEffect(() => {
+  //   if( user ) setFormData({ ...formData, email: user.email, 
+  //     name: user.name, location: user.location 
+  //   })
+  // }, [user, formData])
   
   return (
     <>
@@ -73,11 +86,11 @@ const ProfilePage = ({user}) => {
           <div className="form-group mb-2">
             <label>Zip Code</label>
             <input 
-              type="number" 
+              type="text" 
               className="form-control" 
-              name="location" 
-              placeholder={user?.location}
-              value={formData.location} 
+              name="zipCode" 
+              placeholder={user?.zipCode}
+              value={formData.zipCode} 
               onChange={handleInputChange}
             />
           </div>

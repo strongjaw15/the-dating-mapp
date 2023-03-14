@@ -14,6 +14,7 @@ module.exports = {
         username: body.username,
         email: body.email,
         zipCode: body.zipCode,
+        interestScore: body.interestScore,
         password: password,
       };
       console.log(userToInsert);
@@ -47,7 +48,7 @@ module.exports = {
     let userToUpdate = {
       email: body.email,
       name: body.name,
-      location: body.location,
+      zipCode: body.zipCode,
     };
 
     if (body.password?.length) {
@@ -115,13 +116,12 @@ module.exports = {
     const user = await User.findById(isVerified.id);
     if (!user) return res.status(401).json({ msg: "un-authorized" });
 
-    return res
-      .status(200)
-      .json({
-        _id: user._id,
-        email: user.email,
-        name: user.name,
-        location: user.location,
-      });
+    return res.status(200).json({
+      _id: user._id,
+      email: user.email,
+      name: user.name,
+      zipCode: user.zipCode,
+      interestScore: user.interestScore,
+    });
   },
 };

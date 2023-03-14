@@ -1,7 +1,7 @@
 {
-  "name": "mern-auth-starter",
+  "name": "the-dating-mapp",
   "version": "1.0.0",
-  "description": "",
+  "description": "A location based dating app.",
   "main": "server/server.js",
   "scripts": {
     "start": "node server/server.js",

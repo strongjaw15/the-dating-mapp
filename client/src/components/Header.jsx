@@ -86,9 +86,6 @@ const Header = ({user}) => {
                     <li className="nav-item">
                       <a className="nav-link" href="/login">Login</a>
                     </li>
-                    <li className="nav-item">
-                      <a className="nav-link" href="/get-connected">Get Connected</a>
-                    </li>
                   </>
                 ) : (
                   <>
@@ -98,6 +95,9 @@ const Header = ({user}) => {
 
                     <li className="nav-item">
                       <a className="nav-link" href="##" onClick={logout}>Logout</a>
+                    </li>
+                    <li className="nav-item">
+                      <a className="nav-link" href="/get-connected">Get Connected</a>
                     </li>
                   </>
                 )}

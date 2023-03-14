@@ -1,107 +1,72 @@
 import { Maps } from "../components";
+
 import Carousel from 'react-bootstrap/Carousel';
 import person from '../images/person.png'
 import '../styles/getConnected.css'
+import { useState, useEffect } from "react";
 
-const GetConnected = () => {
-  const userData = [
-    {
-      id: 1,
-      name: "Ziggy Stardust",
-      username: "ziggy",
-      email: "ziggy@yahoo.com",
-      zipCode: 555101,
-      password: "password",
-      interests: [
-        {
-          apple: "Granny Smith",
-          season: "Fall",
-          bread: "Sourdough",
-          house: "Slytherin",
-          movie: "Midsommer",
-        },
-      ],
-    },
-    {
-      id: 2,
-      name: "David Bowie",
-      username: "davidbowie",
-      email: "david@yahoo.com",
-      zipCode: 55044,
-      password: "password",
-      interests: [
-        {
-          apple: "Golden Delicious",
-          season: "Summer",
-          bread: "Wheat",
-          house: "Hufflepuff",
-          movie: "The Village",
-        },
-      ],
-    },
-    {
-      id: 3,
-      name: "Lily Allen",
-      username: "lilyallen",
-      email: "lily@yahoo.com",
-      zipCode: 55101,
-      password: "password",
-      interests: [
-        {
-          apple: "Golden Delicious",
-          season: "Winter",
-          bread: "Rye",
-          house: "Ravenclaw",
-          movie: "Them That Follow",
-        },
-      ],
-    },
-    {
-      id: 4,
-      name: "Stevie Nicks",
-      username: "stevienicks",
-      email: "stevie@yahoo.com",
-      zipCode: 55101,
-      password: "password",
-      interests: [
-        {
-          apple: "Gala",
-          season: "Spring",
-          bread: "Pumpernickle",
-          house: "Gryffindor",
-          movie: "Hereditary",
-        },
-      ],
-    },
-  ];
-  const userID = "aaa";
-  const getSoulMate = () => {
-    const soulMateID = "rockstar";
-    fetch(`/get-connected/${soulMateID}`);
-    return soulMateID;
+
+const GetConnected = ({ user }) => {
+  const [yourSoulMate, setSoulMate] = useState({});
+  const [yourLocation, setLocation] = useState({});
+
+  function getRandomNumber(x) {
+    return Math.floor(Math.random() * x);
+  }
+
+  const getSoulMate = async () => {
+    const query = await fetch("/api/user", {
+      method: "get",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    if (!query.ok) {
+      console.log("There are no users in the database");
+    } else {
+      const result = await query.json();
+      const possible = result.filter(
+        (soulMate) => soulMate.interestScore === user.interestScore
+      );
+
+      const randomUser = possible[getRandomNumber(possible.length)];
+      const soulMateQuery = await fetch(`/api/get-connected/${randomUser._id}`);
+      if (!soulMateQuery.ok) {
+        console.log("There are no matches in the database");
+      } else {
+        const soulMate = await soulMateQuery.json();
+        setSoulMate(soulMate);
+      }
+    }
   };
 
-  const getLocation = () => {
-    const locationID = "what";
-    fetch(`/get-connected/${locationID}`);
-    return locationID;
+  const getLocation = async () => {
+    const query = await fetch("/api/get-connected/location", {
+      method: "get",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    if (!query.ok) {
+      console.log("There are no locations in the database");
+    } else {
+      const result = await query.json();
+      const randomLocation = result[getRandomNumber(result.length)];
+      setLocation(randomLocation);
+    }
   };
 
-  const displayLocation = () => {
-    fetch(`/get-connected/${userID}/${getLocation}/${getSoulMate}`)
-      .then(function (response) {
-        return response.json();
-      })
-      .then(function (data) {
-        console.log(data);
-      });
-  };
+  useEffect(() => {
+    getSoulMate();
+    getLocation();
+  }, []);
 
   return (
+
     <div className="page">
       {/* <h1>Get Connected</h1> */}
       <div className="maps">
-        <Maps />
+        <Maps yourLocation={yourLocation} />
       </div>
     
       {/* <div className="connected-people">
@@ -131,8 +96,19 @@ const GetConnected = () => {
         </Carousel>
       </div>
       {/* <div className="connected-places"></div> */}
+      
+      <div className="connected-people">
+        <p>Your Soul Mate is: {yourSoulMate.name}!</p>
+      </div>
+
+      <div className="connected-places">
+        <p>
+          You and {yourSoulMate.name} should meet up at the {yourLocation.name},
+          a {yourLocation.type} at {yourLocation.address}.
+        </p>
+      </div>
     </div>
+
   );
 };
-
 export default GetConnected;

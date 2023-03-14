@@ -1,22 +1,20 @@
-const mongoose = require('mongoose');
-require('../config/connection');
+const db = require("../config/connection");
+const { User, Feedback, Interest, Location } = require("../models");
 
-const seedUser = require('./user-seeds');
-const seedFeedback = require('./feedback-seeds');
-const seedInterest = require('./interest-seeds');
+const seedUser = require("./userData");
+const seedFeedback = require("./feedbackData");
+const seedInterest = require("./interestData");
+const seedLocation = require("./locationData");
 
+db.once("open", async () => {
+  const users = await User.insertMany(seedUser);
+  const feedback = await Feedback.insertMany(seedFeedback);
+  const interests = await Interest.insertMany(seedInterest);
+  const locations = await Location.insertMany(seedLocation);
 
-const seedAll = async () => {
-    await seedUser();
-    console.log('\n----- Users SEEDED -----\n');
-
-    await seedFeedback();
-    console.log('\n----- Feedback SEEDED -----\n');
-
-    await seedInterest();
-    console.log('\n----- Interests SEEDED -----\n');
-
-    process.exit(0);
-};
-
-seedAll();
+  console.log("Users seeded!");
+  console.log("Feedback seeded!");
+  console.log("Interests seeded!");
+  console.log("Locations seeded!");
+  process.exit(0);
+});

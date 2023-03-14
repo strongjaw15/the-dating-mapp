@@ -31,6 +31,7 @@ function App() {
       });
       const result = await query.json();
       if (result) {
+        console.log(result)
         setUser(result);
       }
     }
@@ -44,13 +45,16 @@ function App() {
     <BrowserRouter>
       <Wrapper>
         <Header user={user} />
-          <Routes>
-            <Route path="/" element={<HomePage user={user} />} />
-            <Route path="/login" element={<LoginPage />} />
-            <Route path="/profile" element={<ProfilePage user={user} />} />
-            <Route path="/signup" element={<SignupPage />} />
-            <Route path="/get-connected" element={<GetConnected />} />
-          </Routes>
+        <Routes>
+          <Route path="/" element={<HomePage user={user} />} />
+          <Route path="/login" element={<LoginPage />} />
+          <Route path="/profile" element={<ProfilePage user={user} />} />
+          <Route path="/signup" element={<SignupPage />} />
+          <Route
+            path="/get-connected"
+            element={user && <GetConnected user={user} />}
+          />
+        </Routes>
         <Footer />
       </Wrapper>
     </BrowserRouter>

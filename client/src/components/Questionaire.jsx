@@ -1,9 +1,13 @@
 import Dropdown from 'react-bootstrap/Dropdown';
 import DropdownButton from 'react-bootstrap/DropdownButton';
 import {useState} from 'react'
+import cookie from "js-cookie";
 
 
 const Questionaire = ({formData, openModal, setMessage, setSignupResult}) => {
+
+  //test
+  const [ loginResult, setLoginResult ] = useState("")
 
   const [ questionaireData, setQuestionaireData ] = useState()
   const [apple, setApple] = useState('Apple');
@@ -39,7 +43,6 @@ const Questionaire = ({formData, openModal, setMessage, setSignupResult}) => {
   };
 
   const setInterestScore = () => {
-    console.log(questionaireData)
     switch (questionaireData.apple) {
       case "Granny Smith":
         interestScore += 1
@@ -144,8 +147,8 @@ const Questionaire = ({formData, openModal, setMessage, setSignupResult}) => {
     }
     else {
       setInterestScore()
-      questionaireData.interestScore = interestScore
-      console.log(formData)
+      formData.interestScore = interestScore
+      console.log("questionaire", questionaireData)
       const query = await fetch("/api/user", {
         method: "post",
         body: JSON.stringify(formData),
@@ -153,6 +156,7 @@ const Questionaire = ({formData, openModal, setMessage, setSignupResult}) => {
           "Content-Type": "application/json",
         },
       });
+      
       if (!query.ok) {
         setSignupResult("fail");
       } else {
@@ -166,14 +170,39 @@ const Questionaire = ({formData, openModal, setMessage, setSignupResult}) => {
             "Content-Type": "application/json",
           },
         });
-        if(!questionQuery.ok){
-          const questionResult = await questionQuery.json()
-          console.log(questionResult)
-          setSignupResult("success");
+        if (questionQuery.ok) {
+          const questionResult = await questionQuery.json();
+          console.log(questionResult);
         }
+        setSignupResult("success");
+        //test
+        userLogin(formData);
       }
     }
   };
+
+  //test
+  const userLogin = async (formData) => {
+    console.log(formData)
+    const query = await fetch("/api/user/auth", {
+      method: "post",
+      body: JSON.stringify(formData),
+      headers: {
+        "Content-Type": "application/json"
+      }
+    })
+    const result = await query.json()
+
+    if( result && !result.err && result.data && result.data.token ){
+      setLoginResult("success")
+      cookie.set("auth-token", result.data.token, { expires: 3 })
+      window.location.href = "/get-connected"
+    } else {
+      setMessage(`Please enter valid login credentials.`);
+      openModal()
+    }
+  };
+
 
   return (
 

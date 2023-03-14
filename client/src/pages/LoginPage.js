@@ -1,18 +1,17 @@
-import { useState } from "react"
-import cookie from "js-cookie"
-import {Modal} from '../components'
+import { useState } from "react";
+import cookie from "js-cookie";
+import { Modal } from "../components";
 
 const LoginPage = () => {
-
-  const defForm = { email: "", password: "" }
-  const [ formData, setFormData ] = useState(defForm)
-  const [ loginResult, setLoginResult ] = useState("")
+  const defForm = { email: "", password: "" };
+  const [formData, setFormData] = useState(defForm);
+  const [loginResult, setLoginResult] = useState("");
   const [showModal, setShowModal] = useState(false);
   const [message, setMessage] = useState("");
 
   const handleInputChange = (e) => {
-    setFormData({...formData, [e.target.name]: e.target.value})
-  }
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
 
   const openModal = () => {
     setShowModal(true);
@@ -23,8 +22,8 @@ const LoginPage = () => {
   };
 
   const handleFormSubmit = async (e) => {
-    console.log(formData)
-    e.preventDefault()
+    console.log(formData);
+    e.preventDefault();
     const query = await fetch("/api/user/auth", {
       method: "post",
       body: JSON.stringify(formData),
@@ -37,11 +36,13 @@ const LoginPage = () => {
     if( result && !result.err && result.data && result.data.token ){
       setLoginResult("success")
       cookie.set("auth-token", result.data.token, { expires: 3 })
+      window.location.href = "/get-connected"
+
     } else {
       setMessage(`Please enter valid login credentials.`);
-      openModal()
+      openModal();
     }
-  }
+  };
 
   return (
     <>
@@ -52,7 +53,7 @@ const LoginPage = () => {
       <form className="form mb-3">
         <div className="form-group">
           <label>Email Address</label>
-          <input   
+          <input
             type="text"
             name="email"
             placeholder="user@email.com"
@@ -64,7 +65,7 @@ const LoginPage = () => {
 
         <div className="form-group">
           <label>Password</label>
-          <input   
+          <input
             type="password"
             name="password"
             className="form-control"
@@ -74,24 +75,25 @@ const LoginPage = () => {
         </div>
 
         <div className="form-group mt-2">
-          <button className="btn btn-primary" onClick={handleFormSubmit}>Log Me In!</button>
+          <button className="btn btn-primary" onClick={handleFormSubmit}>
+            Log Me In!
+          </button>
         </div>
       </form>
 
-      { loginResult === "success" && (
+      {loginResult === "success" && (
         <div className="alert alert-success" role="alert">
           Login successful!
         </div>
       )}
 
-      { loginResult === "fail" && (
+      {loginResult === "fail" && (
         <div className="alert alert-danger" role="alert">
           Login failed!
         </div>
       )}
     </>
-  )
+  );
+};
 
-}
-
-export default LoginPage
+export default LoginPage;
