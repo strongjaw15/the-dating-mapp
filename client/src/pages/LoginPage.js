@@ -28,14 +28,16 @@ const LoginPage = () => {
       method: "post",
       body: JSON.stringify(formData),
       headers: {
-        "Content-Type": "application/json",
-      },
-    });
-    const result = await query.json();
+        "Content-Type": "application/json"
+      }
+    })
+    const result = await query.json()
 
-    if (result && !result.err && result.data && result.data.token) {
-      setLoginResult("success");
-      cookie.set("auth-token", result.data.token, { expires: 3 });
+    if( result && !result.err && result.data && result.data.token ){
+      setLoginResult("success")
+      cookie.set("auth-token", result.data.token, { expires: 3 })
+      window.location.href = "/get-connected"
+
     } else {
       setMessage(`Please enter valid login credentials.`);
       openModal();
