@@ -120,7 +120,8 @@ module.exports = {
       _id: user._id,
       email: user.email,
       name: user.name,
-      location: user.location,
+      location: user.zipCode,
+      interestScore: user.interestScore,
     });
   },
 };
