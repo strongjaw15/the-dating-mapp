@@ -48,7 +48,7 @@ module.exports = {
     let userToUpdate = {
       email: body.email,
       name: body.name,
-      location: body.location,
+      zipCode: body.zipCode,
     };
 
     if (body.password?.length) {
@@ -120,7 +120,7 @@ module.exports = {
       _id: user._id,
       email: user.email,
       name: user.name,
-      location: user.location,
+      zipCode: user.zipCode,
     });
   },
 };
