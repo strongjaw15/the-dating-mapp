@@ -50,6 +50,7 @@ const GetConnected = ({ user }) => {
         "Content-Type": "application/json",
       },
     });
+    console.log("SoulMate", query);
     if (!query.ok) {
       console.log("There are no users in the database");
     } else {
@@ -69,6 +70,7 @@ const GetConnected = ({ user }) => {
         "Content-Type": "application/json",
       },
     });
+    console.log("Location", query);
     if (!query.ok) {
       console.log("There are no locations in the database");
     } else {
