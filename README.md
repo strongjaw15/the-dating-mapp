@@ -59,7 +59,6 @@ To run locally.
 ## License
 
 MIT License
-![MIT Liscense](https://img.shields.io/badge/License-MIT-green)
 
 Copyright 2023 Group3
 
