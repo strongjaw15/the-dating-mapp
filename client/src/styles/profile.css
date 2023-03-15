@@ -1,0 +1,34 @@
+.profile-box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 2rem;
+}
+
+.profile-box h1 {
+    color: #CAC1F6;
+}
+
+.profile-form {
+    box-shadow: 0 4px 8px 0 #6C6CA8;
+    transition: 0.3s;
+    width: 50%;
+    padding: 1rem;
+}
+
+.profile-form:hover {
+    box-shadow: 0 8px 16px 0 #6C6CA8;
+}
+
+.btn {
+    background-color: #96D7FF !important;
+}
+
+@media screen and (max-width: 991px) {
+    .profile-form {
+        box-shadow: 0 4px 8px 0 #6C6CA8;
+        transition: 0.3s;
+        width: 100%;
+        padding: 1rem;
+    }
+}

@@ -1,6 +1,7 @@
 import { useState } from "react";
 import cookie from "js-cookie";
 import { Modal } from "../components";
+import '../styles/signup.css'
 
 const LoginPage = () => {
   const defForm = { email: "", password: "" };
@@ -45,54 +46,56 @@ const LoginPage = () => {
   };
 
   return (
-    <>
-      <h1>Login Page</h1>
+    <div className="login-box">
+      <div className='mt-5 mb-5 login-form animate__animated animate__fadeIn animate__delay-1s'>
+        <h1>Login Page</h1>
 
-      {showModal ? <Modal message={message} closeModal={closeModal} /> : null}
+        {showModal ? <Modal message={message} closeModal={closeModal} /> : null}
 
-      <form className="form mb-3">
-        <div className="form-group">
-          <label>Email Address</label>
-          <input
-            type="text"
-            name="email"
-            placeholder="user@email.com"
-            className="form-control"
-            value={formData.email}
-            onChange={handleInputChange}
-          />
-        </div>
+        <form className="form mt-4 mb-3">
+          <div className="form-group">
+            <label>Email Address</label>
+            <input
+              type="text"
+              name="email"
+              placeholder="user@email.com"
+              className="form-control"
+              value={formData.email}
+              onChange={handleInputChange}
+            />
+          </div>
 
-        <div className="form-group">
-          <label>Password</label>
-          <input
-            type="password"
-            name="password"
-            className="form-control"
-            value={formData.password}
-            onChange={handleInputChange}
-          />
-        </div>
+          <div className="form-group">
+            <label>Password</label>
+            <input
+              type="password"
+              name="password"
+              className="form-control"
+              value={formData.password}
+              onChange={handleInputChange}
+            />
+          </div>
 
-        <div className="form-group mt-2">
-          <button className="btn btn-primary" onClick={handleFormSubmit}>
-            Log Me In!
-          </button>
-        </div>
-      </form>
+          <div className="form-group mt-2">
+            <button className="btn btn-primary" onClick={handleFormSubmit}>
+              Log Me In!
+            </button>
+          </div>
+        </form>
 
-      {loginResult === "success" && (
-        <div className="alert alert-success" role="alert">
-          Login successful!
-        </div>
-      )}
+        {loginResult === "success" && (
+          <div className="alert alert-success" role="alert">
+            Login successful!
+          </div>
+        )}
 
-      {loginResult === "fail" && (
-        <div className="alert alert-danger" role="alert">
-          Login failed!
-        </div>
-      )}
-    </>
+        {loginResult === "fail" && (
+          <div className="alert alert-danger" role="alert">
+            Login failed!
+          </div>
+        )}
+      </div>
+    </div>
   );
 };
 
