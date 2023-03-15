@@ -11,6 +11,7 @@ import 'animate.css';
 const GetConnected = ({ user }) => {
   const [yourSoulMate, setSoulMate] = useState([]);
   const [yourLocation, setLocation] = useState({});
+  const [loaded, setLoaded] = useState(false);
 
   function getRandomNumber(x) {
     return Math.floor(Math.random() * x);
@@ -74,6 +75,8 @@ const GetConnected = ({ user }) => {
       const result = await query.json();
       const randomLocation = result[getRandomNumber(result.length)];
       setLocation(randomLocation);
+      setLoaded(true);
+      console.log("Location", randomLocation);
     }
   };
 
