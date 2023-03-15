@@ -10,7 +10,6 @@
 ![](https://img.shields.io/badge/v3.0.1-JScookie-red)
 ![](https://img.shields.io/badge/v4.17.1-Express-blue)
 ![](https://img.shields.io/badge/v5.11.6-Mongoose-purple)
-![](https://img.shields.io/badge/v2.0.6-Nodemon-brown)
 ![](https://img.shields.io/badge/100%-Group3-black)
 ![](https://img.shields.io/badge/License-MIT-green)
 
@@ -59,7 +58,6 @@ To run locally.
 ## License
 
 MIT License
-![MIT Liscense](https://img.shields.io/badge/License-MIT-green)
 
 Copyright 2023 Group3
 

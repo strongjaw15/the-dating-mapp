@@ -1,7 +1,7 @@
 import { useState } from "react";
 import cookie from "js-cookie";
 import { Modal } from "../components";
-import '../styles/signup.css'
+import "../styles/signup.css";
 
 const LoginPage = () => {
   const defForm = { email: "", password: "" };
@@ -23,22 +23,20 @@ const LoginPage = () => {
   };
 
   const handleFormSubmit = async (e) => {
-    console.log(formData);
     e.preventDefault();
     const query = await fetch("/api/user/auth", {
       method: "post",
       body: JSON.stringify(formData),
       headers: {
-        "Content-Type": "application/json"
-      }
-    })
-    const result = await query.json()
+        "Content-Type": "application/json",
+      },
+    });
+    const result = await query.json();
 
-    if( result && !result.err && result.data && result.data.token ){
-      setLoginResult("success")
-      cookie.set("auth-token", result.data.token, { expires: 3 })
-      window.location.href = "/get-connected"
-
+    if (result && !result.err && result.data && result.data.token) {
+      setLoginResult("success");
+      cookie.set("auth-token", result.data.token, { expires: 3 });
+      window.location.href = "/get-connected";
     } else {
       setMessage(`Please enter valid login credentials.`);
       openModal();
@@ -47,7 +45,7 @@ const LoginPage = () => {
 
   return (
     <div className="login-box">
-      <div className='mt-5 mb-5 login-form animate__animated animate__fadeIn animate__delay-1s'>
+      <div className="mt-5 mb-5 login-form animate__animated animate__fadeIn animate__delay-1s">
         <h1>Login Page</h1>
 
         {showModal ? <Modal message={message} closeModal={closeModal} /> : null}

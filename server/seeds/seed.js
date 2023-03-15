@@ -7,6 +7,11 @@ const seedInterest = require("./interestData");
 const seedLocation = require("./locationData");
 
 db.once("open", async () => {
+  const usersD = await User.deleteMany();
+  const feedbackD = await Feedback.deleteMany();
+  const interestsD = await Interest.deleteMany();
+  const locationsD = await Location.deleteMany();
+
   const users = await User.insertMany(seedUser);
   const feedback = await Feedback.insertMany(seedFeedback);
   const interests = await Interest.insertMany(seedInterest);
