@@ -1,30 +1,23 @@
-.card {
-  display: inline-block;
-  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
-  transition: 0.3s;
-}
-
-.card:hover {
-box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
-}
-
-.container {
-padding: 2px 16px;
-}
-
 img {
 display: inline-block;
 width: 50%;
 }
 
 .size {
-width: 100vh;
-background-color: #C9C0F5;
+width: 85vh;
+background-color: #6C6EA9;
 }
 
 .display {
 display: flex;
 justify-content: center;
+background-image:   
+linear-gradient(
+    to bottom,
+    #E1EEFF,
+    #96D7FF,
+    #CAC1F6
+  );
 }
 
 .carousel-text {
@@ -33,7 +26,7 @@ top: 10%;
 right: 5%;
 width: 40%;
 font-size: 1rem;
-color: white;
+color: white ;
 }
 
 p {

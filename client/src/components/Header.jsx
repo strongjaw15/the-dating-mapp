@@ -4,7 +4,7 @@ import logo from  '../images/map-cloud.jpeg'
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
-import NavDropdown from 'react-bootstrap/NavDropdown';
+import Offcanvas from 'react-bootstrap/Offcanvas';
 
 
 const Header = ({user}) => {
@@ -22,8 +22,8 @@ const Header = ({user}) => {
   //     }, [user]);
 
   return (
-    <header className="px-2 pb-0 mb-0" style={{ borderBottom: "1px solid #333" }}>
-      <div className='header-bar'>
+    <header className="pb-0 mb-0 animate__animated animate__fadeInRight animate__slow">
+      <div className='header-box border-gradient border-gradient-stars only-bottom'>
         <div className='header-bar'>
           <h1 className='brand' >Dating Mapp</h1>
           <img src={logo} alt='map' className='logo'/>
@@ -32,8 +32,12 @@ const Header = ({user}) => {
         <Navbar bg="white" expand="lg">
           <Container>
             <Navbar.Toggle aria-controls="basic-navbar-nav" />
-            <Navbar.Collapse id="basic-navbar-nav">
-              <Nav className="me-auto flex-column">
+            <Navbar.Offcanvas id="offcanvasNavbar-expand-md" aria-labelledby="offcanvasNavbar-expand-md" placement='end'>
+              <Offcanvas.Header closeButton>
+                <Offcanvas.Title id="offcanvasNavbar-expand-md"> Dating Map</Offcanvas.Title>
+              </Offcanvas.Header>
+              <Offcanvas.Body>
+              <Nav className="justify-content-end flex-grow-1 pe-3 flex-column">
                 <Nav.Link href="/">Home</Nav.Link>
 
                 { !user ? (
@@ -48,65 +52,14 @@ const Header = ({user}) => {
                   <Nav.Link href='/get-connected' >Get Connected</Nav.Link>
                   </>
                 )}
-                
               </Nav>
-            </Navbar.Collapse>
+              </Offcanvas.Body>
+            </Navbar.Offcanvas>
           </Container>
         </Navbar>
         </div>
 
       </div>
-
-      {/* <div className='header-bar'>
-        <div className='header-bar'>
-          <h1 >Dating Mapp</h1>
-          <img src={logo} alt='map' className='logo'/>
-        </div>
-        <nav className="navbar navbar-light navbar-expand-md bg-body-secondary" data-bs-theme="light">
-          <div className="container-fluid">
-            <div>
-              <title>Dating Mapp</title>
-            </div>
-            <a className="navbar-brand" href="##">Dating Mapp</a>
-            <img src={logo} alt='map' className='logo' />
-            <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-              <span className="navbar-toggler-icon"></span>
-            </button>
-            <div className="collapse navbar-collapse" id="navbarSupportedContent">
-              <ul className="navbar-nav me-auto mb-2 mb-lg-0 flex-column">
-                <li className="nav-item">
-                  <a className="nav-link active" aria-current="page" href="/">Home</a>
-                </li>
-                
-                { !user ? (
-                  <>
-                    <li className="nav-item">
-                      <a className="nav-link" href="/signup">Get Started</a>
-                    </li>
-                    <li className="nav-item">
-                      <a className="nav-link" href="/login">Login</a>
-                    </li>
-                  </>
-                ) : (
-                  <>
-                    <li className="nav-item">
-                      <a className="nav-link" href="/profile">Profile</a>
-                    </li>
-
-                    <li className="nav-item">
-                      <a className="nav-link" href="##" onClick={logout}>Logout</a>
-                    </li>
-                    <li className="nav-item">
-                      <a className="nav-link" href="/get-connected">Get Connected</a>
-                    </li>
-                  </>
-                )}
-                
-              </ul>
-            </div>
-          </div>
-        </nav>
-      </div> */}
     </header>
   )
 }
