@@ -104,11 +104,10 @@ const GetConnected = ({ user }) => {
               {loaded && (
                 <div className="maps">
                   <Maps yourLocation={yourLocation} />
-                  <p className="location">
-                    You and {yourSoulMate.name} should meet up at the{" "}
-                    {yourLocation.name}, a {yourLocation.type} at{" "}
-                    {yourLocation.address} at 6:37PM tomorrow.
-                  </p>
+                <p className="location">
+                  You and your Soulmate should meet up at the {yourLocation.name},
+                  a {yourLocation.type} at {yourLocation.address} at 6:37PM tomorrow.
+                </p>
                 </div>
               )}
             </div>

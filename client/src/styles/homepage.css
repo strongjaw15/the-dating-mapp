@@ -5,12 +5,15 @@ width: 50%;
 
 .size {
 width: 85vh;
-background-color: #6C6EA9;
+background-color: white;
+box-shadow: 0 4px 8px 0 #6C6CA8;
 }
 
 .display {
 display: flex;
+flex-direction: column;
 justify-content: center;
+align-items: center;
 background-image:   
 linear-gradient(
     to bottom,
@@ -25,8 +28,8 @@ position: absolute;
 top: 10%;
 right: 5%;
 width: 40%;
-font-size: 1rem;
-color: white ;
+font-size: 2rem;
+color: #96D7FF;
 }
 
 p {
@@ -40,5 +43,104 @@ font-style: italic;
 }
 
 .carousel-indicators button {
-    background-color: #6C6EA9 !important;
+    background-color:#CAC1F6 !important;
+}
+
+.aside {
+  display: flex;
+  flex-direction: row;
+  background-color: white;
+  align-items: center;
+  padding-top: 2rem;
+  box-shadow: 0 4px 8px 0 #6C6CA8;
+  margin: 5rem;
+}
+
+.stats-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.stats-text {
+  padding: 1rem;
+  text-align: center;
+  color: #6C6CA8;
+}
+
+.stats-img {
+  display: flex;
+  justify-content: center;
+}
+
+.stats-icon {
+  width: 25vw;
+}
+
+.testimony {
+  margin-top: 3rem;
+}
+
+@media screen and (max-width: 991px) {
+  .aside {
+    display: flex;
+    flex-direction: column;
+    background-color: white;
+    align-items: center;
+    padding-top: 2rem;
+    box-shadow: 0 4px 8px 0 #6C6CA8;
+    margin: 5rem;
+  }
+
+  .size {
+    width: 65vw;
+    background-color: white;
+    box-shadow: 0 4px 8px 0 #6C6CA8;
+    }
+
+    .carousel-text {
+      position: absolute;
+      top: 10%;
+      right: 5%;
+      width: 40%;
+      font-size: 0.9rem;
+      color: #96D7FF;
+      }
+
+      .username {
+        font-size: 0.9rem;
+      }
+
+}
+
+@media screen and (max-width: 400px) {
+  .aside {
+    display: flex;
+    flex-direction: column;
+    background-color: white;
+    align-items: center;
+    padding-top: 2rem;
+    box-shadow: 0 4px 8px 0 #6C6CA8;
+    margin: 5rem;
+  }
+
+  .size {
+    width: 65vw;
+    background-color: white;
+    box-shadow: 0 4px 8px 0 #6C6CA8;
+    }
+
+    .carousel-text {
+      position: absolute;
+      top: 10%;
+      right: 5%;
+      width: 40%;
+      font-size: 0.7rem;
+      color: #96D7FF;
+      }
+
+      .username {
+        font-size: 0.9rem;
+      }
+
 }
