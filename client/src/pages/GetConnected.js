@@ -55,6 +55,7 @@ const GetConnected = ({ user }) => {
       console.log("There are no users in the database");
     } else {
       const result = await query.json();
+      console.log("Soul response", result);
       const possible = result.filter(
         (soulMate) => soulMate.interestScore === user.interestScore
       );
@@ -75,6 +76,7 @@ const GetConnected = ({ user }) => {
       console.log("There are no locations in the database");
     } else {
       const result = await query.json();
+      console.log("Location restponse", result);
       const randomLocation = result[getRandomNumber(result.length)];
       setLocation(randomLocation);
       setLoaded(true);
