@@ -70,6 +70,7 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 ## Screenshots
 
 ![Home page Screenshot](./assets/images/the-dating-mapp-homepage-screenshot.png)
+![Home page 2 Screenshot](./assets/images/the-dating-mapp-homepage2-screenshot.png)
 ![Signup page Screenshot](./assets/images/the-dating-mapp-signup-screenshot.png)
 ![Login page Screenshot](./assets/images/the-dating-mapp-login-screenshot.png)
 ![Profile page Screenshot](./assets/images/the-dating-mapp-profile-screenshot.png)
