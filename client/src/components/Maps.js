@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { GoogleMap, LoadScript, Marker } from "@react-google-maps/api";
 
 const containerStyle = {
@@ -7,23 +7,41 @@ const containerStyle = {
 };
 
 function Maps(yourLocation) {
-  const center = {
-    lat: yourLocation.yourLocation.latPosition,
-    lng: yourLocation.yourLocation.lngPosition,
-  };
+  const [center, setCenter] = useState(null);
+  const [position, setPosition] = useState(null);
 
-  const position = {
-    lat: yourLocation.yourLocation.latPosition,
-    lng: yourLocation.yourLocation.lngPosition,
-  };
+  // console.log(yourLocation.yourLocation);
+  // const center = {
+  //   lat: yourLocation.yourLocation.latPosition,
+  //   lng: yourLocation.yourLocation.lngPosition,
+  // };
+
+  // const position = {
+  //   lat: yourLocation.yourLocation.latPosition,
+  //   lng: yourLocation.yourLocation.lngPosition,
+  // };
+  useEffect(() => {
+    setCenter({
+      lat: yourLocation.yourLocation.latPosition,
+      lng: yourLocation.yourLocation.lngPosition,
+    });
+
+    setPosition({
+      lat: yourLocation.yourLocation.latPosition,
+      lng: yourLocation.yourLocation.lngPosition,
+    });
+  }, []);
+
   return (
-    <LoadScript googleMapsApiKey={process.env.REACT_APP_GOOGLE_MAPS_API_KEY}>
-      <GoogleMap mapContainerStyle={containerStyle} center={center} zoom={11}>
-        <>
-          <Marker position={position} />
-        </>
-      </GoogleMap>
-    </LoadScript>
+    <div>
+      <LoadScript googleMapsApiKey={process.env.REACT_APP_GOOGLE_MAPS_API_KEY}>
+        <GoogleMap mapContainerStyle={containerStyle} center={center} zoom={11}>
+          <>
+            <Marker position={position} />
+          </>
+        </GoogleMap>
+      </LoadScript>
+    </div>
   );
 }
 export default Maps;

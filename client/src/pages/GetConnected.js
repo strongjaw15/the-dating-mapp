@@ -8,6 +8,7 @@ import { useState, useEffect } from "react";
 const GetConnected = ({ user }) => {
   const [yourSoulMate, setSoulMate] = useState([]);
   const [yourLocation, setLocation] = useState({});
+  const [loaded, setLoaded] = useState(false);
 
   function getRandomNumber(x) {
     return Math.floor(Math.random() * x);
@@ -71,6 +72,8 @@ const GetConnected = ({ user }) => {
       const result = await query.json();
       const randomLocation = result[getRandomNumber(result.length)];
       setLocation(randomLocation);
+      setLoaded(true);
+      console.log("Location", randomLocation);
     }
   };
 
@@ -83,7 +86,7 @@ const GetConnected = ({ user }) => {
     <div className="page">
       {/* <h1>Get Connected</h1> */}
       <div className="maps">
-        <Maps yourLocation={yourLocation} />
+        {loaded && <Maps yourLocation={yourLocation} />}
       </div>
 
       {/* <div className="connected-people">
