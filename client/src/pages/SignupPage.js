@@ -5,6 +5,7 @@ import "../styles/signup.css";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
+import 'animate.css';
 
 const SignupPage = (props) => {
   const defForm = {
@@ -34,14 +35,14 @@ const SignupPage = (props) => {
   };
 
   return (
-    <>
+    <div>
       {/* <h1>give us the deets</h1> */}
 
       {showModal ? <Modal message={message} closeModal={closeModal} /> : null}
       <Container>
-        <form className="form mb-3">
+        <form className="form mt-5 mb-5">
           <Row>
-            <Col sm={12} lg={5} className="card">
+            <Col sm={12} lg={5} className="signup-form animate__animated animate__fadeInDown animate__delay-1s">
               <div className="form-group">
                 <label>Email Address</label>
                 <input
@@ -112,7 +113,7 @@ const SignupPage = (props) => {
                 />
               </div>
             </Col>
-            <Col sm={12} lg={6} className="card">
+            <Col sm={12} lg={6} className="signup-form animate__animated animate__fadeInUp animate__delay-1s">
               <Questionaire
                 formData={formData}
                 openModal={openModal}
@@ -135,7 +136,7 @@ const SignupPage = (props) => {
           </div>
         )}
       </Container>
-    </>
+    </div>
   );
 };
 

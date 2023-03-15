@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react"
+import "../styles/profile.css"
 
 const ProfilePage = ({user}) => {
   const [ formData, setFormData ] = useState({ email: "", password: "", name: "", zipCode: "" })
@@ -56,10 +57,10 @@ const ProfilePage = ({user}) => {
   // }, [user, formData])
   
   return (
-    <>
+    <div className="profile-box animate__animated animate__fadeIn animate__delay-1s">
       <h1>Your Profile</h1>
 
-      <div style={{ width: "50%"}}>
+      <div className="profile-form">
         <form onSubmit={update} className="mb-2">
           <div className="form-group mb-2">
             <label>Email Address</label>
@@ -107,7 +108,7 @@ const ProfilePage = ({user}) => {
           </div>
 
           <div className="form-group">
-            <button className="btn btn-primary">Update Profile</button>
+            <button className="btn">Update Profile</button>
           </div>
         </form>
 
@@ -123,7 +124,7 @@ const ProfilePage = ({user}) => {
           </div>
         )}
       </div>
-    </>
+    </div>
   )
 }
 

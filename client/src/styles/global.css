@@ -1,7 +1,11 @@
 @import url('https://fonts.googleapis.com/css2?family=Shrikhand&display=swap');
 
+* {
+  font-family: 'Shrikhand', cursive;
+}
+
 .logo {
-    width: 20%;
+    width: 15%;
 }
 
 .header-bar {
@@ -9,9 +13,87 @@
     align-items: center;
 }
 
+.header-box {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
 .brand {
-    font-size: 8vw;
-    font-family: 'Shrikhand', cursive;
+    font-size: 6vw;
     color: #6C6CA8;
     padding-left: 1rem;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+a {
+  background:
+    linear-gradient(
+      to right,
+      #6C6CA8,
+      #6C6CA8
+    ),
+    linear-gradient(
+      to right,
+      #E1EEFF,
+      #96D7FF,
+      #CAC1F6
+  );
+  background-size: 100% 3px, 0 3px;
+  background-position: 100% 100%, 0 100%;
+  background-repeat: no-repeat;
+  transition: background-size 500ms;
+}
+
+a:hover {
+  background-size: 0 3px, 100% 3px;
+}
+
+.footer-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: #6C6CA8;
+}
+
+.border-gradient {
+  border: 10px solid;
+  border-image-slice: 1;
+  border-width: 5px;
+}
+
+.border-gradient-stars {
+  border-image-source:   
+  linear-gradient(
+    to right,
+    #E1EEFF,
+    #96D7FF,
+    #CAC1F6
+  )
+}
+
+.border-gradient-moons {
+  border-image-source:   
+  linear-gradient(
+    to left,
+    #E1EEFF,
+    #96D7FF,
+    #CAC1F6
+  )
+}
+
+.only-top {
+  border-left: 0;
+  border-right: 0;
+  border-bottom: 0;
+}
+
+.only-bottom {
+  border-left: 0;
+  border-right: 0;
+  border-top: 0;
 }
