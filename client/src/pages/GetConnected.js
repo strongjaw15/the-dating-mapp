@@ -8,7 +8,6 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import 'animate.css';
 
-
 const GetConnected = ({ user }) => {
   const [yourSoulMate, setSoulMate] = useState([]);
   const [yourLocation, setLocation] = useState({});
